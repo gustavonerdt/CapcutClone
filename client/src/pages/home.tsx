@@ -321,6 +321,7 @@ export default function Home() {
                         <FormControl>
                           <Input
                             {...field}
+                            value={field.value ?? ""}
                             type="tel"
                             placeholder="(00) 00000-0000"
                             className="h-12 text-base"

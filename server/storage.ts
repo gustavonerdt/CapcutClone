@@ -18,6 +18,7 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const response: QuizResponse = {
       ...insertResponse,
+      phone: insertResponse.phone ?? null,
       id,
       createdAt: new Date(),
     };
