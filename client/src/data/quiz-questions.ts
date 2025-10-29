@@ -6,9 +6,9 @@ export const quizQuestions: QuizQuestion[] = [
     question: "De quem você comprava perfumes importados até este momento?",
     type: "standard",
     answers: [
-      { id: "sites-lojas-brasil", text: "🛒 Sites e lojas no Brasil" },
-      { id: "paraguai", text: "🌎 Comprava do Paraguai" },
-      { id: "conhecido", text: "👥 De um conhecido" },
+      { id: "sites-lojas-brasil", text: "Sites e lojas no Brasil" },
+      { id: "paraguai", text: "Comprava do Paraguai" },
+      { id: "conhecido", text: "De um conhecido" },
     ],
   },
   {
@@ -16,8 +16,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Você já cogitou revender perfumes importados e viver disso ou tá satisfeito como consumidor, mas tem interesse de comprar mais barato?",
     type: "standard",
     answers: [
-      { id: "revender", text: "💼 Já cogitei revender perfumes importados" },
-      { id: "economizar", text: "💰 Pretendo apenas economizar em minhas compras pessoais" },
+      { id: "revender", text: "Já cogitei revender perfumes importados" },
+      { id: "economizar", text: "Pretendo apenas economizar em minhas compras pessoais" },
     ],
   },
   {
@@ -25,8 +25,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "O Naipers Club vai te oferecer:",
     type: "benefits",
     answers: [
-      { id: "parece-bom", text: "✨ Maravilha, parece ser muito bom!" },
-      { id: "prova", text: "🤔 Me prova que vale a pena" },
+      { id: "parece-bom", text: "Maravilha, parece ser muito bom!" },
+      { id: "prova", text: "Me prova que vale a pena" },
     ],
   },
   {
@@ -34,8 +34,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Veja o que os membros do Club estão falando do NAIPER'S CLUB",
     type: "testimonials",
     answers: [
-      { id: "quero-reduzir", text: "🚀 Também quero reduzir meus custos e começar a ganhar dinheiro com isso!" },
-      { id: "deixar-passar", text: "😕 Vou deixar passar essa chance…" },
+      { id: "quero-reduzir", text: "Também quero reduzir meus custos e começar a ganhar dinheiro com isso!" },
+      { id: "deixar-passar", text: "Vou deixar passar essa chance…" },
     ],
   },
   {
@@ -43,19 +43,19 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Com base nas suas respostas, sua chance de poupar muita grana em suas compras pessoais e lucrar com perfumes importados é:",
     type: "progress",
     answers: [
-      { id: "avancar", text: "▶️ Avançar" },
+      { id: "avancar", text: "Avançar" },
     ],
   },
 ];
 
 export const heroBenefits = [
   {
-    icon: "💰",
+    icon: "savings",
     title: "70% de Economia",
     description: "Economize até 70% em perfumes importados originais"
   },
   {
-    icon: "💸",
+    icon: "income",
     title: "Renda Extra",
     description: "Jeito simples de fazer renda extra com perfumes"
   }
@@ -77,6 +77,45 @@ export const finalOfferBenefits = [
   "Suporte diário + acesso a estoque com mais de 300 tipos de perfumes entre árabes, designers e perfumes de nicho a pronta entrega.",
   "Acesso a tabelas e Books promocionais das importadoras oficiais (A FONTE OFICIAL)",
   "Tudo isso com acesso por 12 meses.",
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Igor",
+    text: "Show de bola! Sauvage selado, estava atrás tem um tempo. J'adore nem se fala. Creme Angel é outra iguaria sensacional da Mugler. Grato pela sua atenção no pré e pós-venda. Parabéns pela responsabilidade e compromisso com o cliente. Grande abraço!",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Cliente Verificado",
+    text: "Pedido feito, e retirado com sucesso. A partir de agora não corro mais o risco de comprar perfumes falsos. Obrigado pelo tratamento, atenção e seriedade desde o primeiro contato no WhatsApp até o momento da entrega. Deus abençoe sempre",
+    rating: 5
+  },
+  {
+    id: 3,
+    name: "Anastácia (Naipe da Gringa-RJ)",
+    text: "Qualificação pessoal! Valeu pelo cuidado com os produtos. Show de bola!",
+    rating: 5
+  },
+  {
+    id: 4,
+    name: "Cliente Satisfeito",
+    text: "Passando pra agradecer por mais um pedido recebido com sucesso. Amanhã já serão entregue. Deus abençoe grandemente!",
+    rating: 5
+  },
+  {
+    id: 5,
+    name: "Junior Silva",
+    text: "Top demais! Tá na mão!",
+    rating: 5
+  },
+  {
+    id: 6,
+    name: "Cliente Premium",
+    text: "Tá na mão. Alto padrão de embalagens. Perfume top demais!",
+    rating: 5
+  },
 ];
 
 export const checkoutUrl = "https://payment.ticto.app/O9F6EC239";

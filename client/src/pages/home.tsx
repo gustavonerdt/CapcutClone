@@ -10,10 +10,10 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { QuizFormData, InsertQuizResponse } from "@shared/schema";
 import { quizFormSchema } from "@shared/schema";
-import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star, Quote, PiggyBank, DollarSign, X } from "lucide-react";
 import heroImage from "@assets/generated_images/Video_creator_hero_image_1da409f3.png";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
-import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits } from "@/data/quiz-questions";
+import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits, testimonials } from "@/data/quiz-questions";
 import { useTracking } from "@/hooks/use-tracking";
 
 export default function Home() {
@@ -196,21 +196,26 @@ export default function Home() {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 pt-6 sm:pt-8 max-w-3xl mx-auto px-4"
               >
-                {heroBenefits.map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.6 + index * 0.1 }}
-                    className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border border-white/20 text-center space-y-3 hover:border-[#FFD700]/50 hover:shadow-lg hover:shadow-[#FFD700]/20 transition-all duration-300"
-                  >
-                    <div className="text-3xl sm:text-4xl">{benefit.icon}</div>
-                    <h3 className="font-bold text-[#FFD700] text-base sm:text-lg drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-white/80 text-xs sm:text-sm leading-relaxed">{benefit.description}</p>
-                  </motion.div>
-                ))}
+                {heroBenefits.map((benefit, index) => {
+                  const IconComponent = benefit.icon === "savings" ? PiggyBank : DollarSign;
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border border-white/20 text-center space-y-3 hover:border-[#FFD700]/50 hover:shadow-lg hover:shadow-[#FFD700]/20 transition-all duration-300"
+                    >
+                      <div className="flex justify-center">
+                        <IconComponent className="w-10 h-10 sm:w-12 sm:h-12 text-[#FFD700]" />
+                      </div>
+                      <h3 className="font-bold text-[#FFD700] text-base sm:text-lg drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-white/80 text-xs sm:text-sm leading-relaxed">{benefit.description}</p>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             </div>
           </motion.div>
@@ -345,15 +350,27 @@ export default function Home() {
                 <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-red-500/40 bg-red-500/10 space-y-4 backdrop-blur-xl">
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Antes</h3>
                   <div className="space-y-2.5">
-                    <p className="text-sm sm:text-base text-white/80">❌ Comprando errado e perdendo dinheiro</p>
-                    <p className="text-sm sm:text-base text-white/80">❌ Sem vender por falta de conhecimento</p>
+                    <div className="flex items-start gap-2">
+                      <X className="w-4 h-4 text-red-500 flex-shrink-0 mt-1" />
+                      <p className="text-sm sm:text-base text-white/80">Comprando errado e perdendo dinheiro</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <X className="w-4 h-4 text-red-500 flex-shrink-0 mt-1" />
+                      <p className="text-sm sm:text-base text-white/80">Sem vender por falta de conhecimento</p>
+                    </div>
                   </div>
                 </div>
                 <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-[#FFD700]/50 bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 space-y-4 backdrop-blur-xl shadow-xl shadow-[#FFD700]/20">
                   <h3 className="text-xl sm:text-2xl font-bold text-[#FFD700]">Depois</h3>
                   <div className="space-y-2.5">
-                    <p className="text-sm sm:text-base text-white font-medium">✅ Comprando certo - Economizando até 70%</p>
-                    <p className="text-sm sm:text-base text-white font-medium">✅ Lucrando de R$ 150 à 400 por venda feita</p>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#FFD700] flex-shrink-0 mt-1" />
+                      <p className="text-sm sm:text-base text-white font-medium">Comprando certo - Economizando até 70%</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#FFD700] flex-shrink-0 mt-1" />
+                      <p className="text-sm sm:text-base text-white font-medium">Lucrando de R$ 150 à 400 por venda feita</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -369,6 +386,50 @@ export default function Home() {
                   <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                   Comprar agora por 12x R$ 20,37
                 </Button>
+              </div>
+
+              {/* Testimonials Section */}
+              <div className="space-y-6 sm:space-y-8">
+                <div className="text-center space-y-3">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#FFD700] via-white to-[#FFD700] bg-clip-text text-transparent">
+                    O Que Nossos Clientes Dizem
+                  </h3>
+                  <p className="text-sm sm:text-base text-white/70">Depoimentos reais de quem já está economizando e lucrando</p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {testimonials.map((testimonial, index) => (
+                    <motion.div
+                      key={testimonial.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/20 backdrop-blur-xl hover:border-[#FFD700]/40 hover:shadow-xl hover:shadow-[#FFD700]/20 transition-all group"
+                      data-testid={`testimonial-${testimonial.id}`}
+                    >
+                      <Quote className="absolute top-4 right-4 w-8 h-8 text-[#FFD700]/20 group-hover:text-[#FFD700]/40 transition-colors" />
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-1">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
+                          ))}
+                        </div>
+                        
+                        <p className="text-sm sm:text-base text-white/90 leading-relaxed line-clamp-4">
+                          "{testimonial.text}"
+                        </p>
+                        
+                        <div className="pt-2 border-t border-white/10">
+                          <p className="text-xs sm:text-sm font-semibold text-[#FFD700]">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-xs text-white/50">Cliente Verificado</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
 
               {/* Benefits Section */}
@@ -404,10 +465,10 @@ export default function Home() {
 
               {/* Benefits Badges */}
               <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/70">
-                <span className="bg-white/10 px-3 py-1.5 rounded-full">🎁 Acesso imediato</span>
-                <span className="bg-white/10 px-3 py-1.5 rounded-full">💥 De R$ 297 Por 197</span>
-                <span className="bg-white/10 px-3 py-1.5 rounded-full">📲 Experiencie direto do seu celular</span>
-                <span className="bg-white/10 px-3 py-1.5 rounded-full">🚀 Comece hoje a economizar e lucrar com perfumes importados originais</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">Acesso imediato</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">De R$ 297 Por 197</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">Experiencie direto do seu celular</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">Comece hoje a economizar e lucrar com perfumes importados originais</span>
               </div>
             </div>
           </motion.div>
