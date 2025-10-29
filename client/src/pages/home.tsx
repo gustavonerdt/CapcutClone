@@ -145,19 +145,6 @@ export default function Home() {
                 />
               </motion.div>
 
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-[#1E90FF]/20 backdrop-blur-xl border border-[#FFD700]/30 shadow-lg shadow-[#FFD700]/20"
-              >
-                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E90FF] fill-[#1E90FF] animate-pulse" />
-                <span className="text-xs sm:text-sm font-semibold text-white">
-                  Mais de 10.000 membros já economizando até 70%
-                </span>
-                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#FFD700] fill-[#FFD700] animate-pulse" />
-              </motion.div>
-
               <motion.h1
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
