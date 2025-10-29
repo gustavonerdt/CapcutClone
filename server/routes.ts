@@ -22,6 +22,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { username, password } = req.body;
       
+      console.log('[LOGIN ATTEMPT]', {
+        receivedUsername: username,
+        expectedUsername: ADMIN_USERNAME,
+        usernameMatch: username === ADMIN_USERNAME,
+        passwordMatch: password === ADMIN_PASSWORD,
+        hasBody: !!req.body
+      });
+      
       if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
         req.session.isAdmin = true;
         res.json({ success: true });
@@ -29,6 +37,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.status(401).json({ error: "Invalid credentials" });
       }
     } catch (error) {
+      console.error('[LOGIN ERROR]', error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
