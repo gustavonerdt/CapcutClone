@@ -1,0 +1,61 @@
+📦 NAIPER'S CLUB - PACOTE HOSTINGER
+===================================
+
+✅ ARQUIVOS INCLUÍDOS:
+
+📄 DOCUMENTAÇÃO
+- README.md - Visão geral do pacote
+- DEPLOY_INSTRUCTIONS.md - Guia completo de instalação (LEIA PRIMEIRO!)
+- QUICK_START.txt - 5 passos rápidos
+- schema_mysql.sql - Schema do banco de dados MySQL
+
+🔧 CONFIGURAÇÃO
+- config/database.php - Conexão MySQL (EDITE suas credenciais aqui)
+- .htaccess - Configuração Apache/routing
+
+🔐 AUTENTICAÇÃO & SEGURANÇA
+- includes/auth.php - Funções de autenticação e segurança
+
+🌐 API ENDPOINTS (Backend PHP)
+- api/sessions.php - POST - Criar sessão de tracking
+- api/sessions-id.php - PATCH - Atualizar sessão (buy/complete flags)
+- api/tracking.php - POST/GET - Eventos de tracking
+- api/quiz-responses.php - POST/GET - Respostas do quiz
+- api/analytics.php - GET - Dashboard analytics (admin only)
+- api/auth/login.php - POST - Login admin
+- api/auth/logout.php - POST - Logout admin
+- api/auth/status.php - GET - Verificar autenticação
+
+💻 FRONTEND (React Compilado)
+- public/index.html - SPA React
+- public/assets/ - CSS, JS, imagens
+
+📊 ROTAS DA API
+✅ POST   /api/sessions - Criar sessão
+✅ PATCH  /api/sessions/{id} - Atualizar sessão
+✅ POST   /api/tracking - Salvar evento
+✅ GET    /api/tracking - Listar eventos (admin)
+✅ POST   /api/quiz-responses - Enviar quiz
+✅ GET    /api/quiz-responses - Listar leads (admin)
+✅ GET    /api/analytics - Dashboard (admin)
+✅ POST   /api/auth/login - Login
+✅ POST   /api/auth/logout - Logout
+✅ GET    /api/auth/status - Status auth
+
+🎯 FUNCIONALIDADES
+- Quiz funnel com 5 perguntas em português
+- Tracking completo (page views, clicks, exits, conversões)
+- Captura de leads (nome, email, telefone)
+- Dashboard admin com métricas em tempo real
+- Autenticação segura com bcrypt
+- Integração com checkout Ticto
+
+📌 TAMANHO DO PACOTE: ~1.8 MB
+
+🚀 PRÓXIMOS PASSOS:
+1. Extraia este arquivo
+2. Leia DEPLOY_INSTRUCTIONS.md
+3. Siga os 5 passos do QUICK_START.txt
+4. Sua aplicação estará no ar!
+
+===================================

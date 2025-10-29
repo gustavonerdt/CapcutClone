@@ -1,0 +1,37 @@
+===========================================
+NAIPER'S CLUB - GUIA RÁPIDO DE INSTALAÇÃO
+===========================================
+
+🚀 5 PASSOS PARA COLOCAR NO AR:
+
+1️⃣ CRIAR BANCO DE DADOS
+   - Entre no cPanel do Hostinger
+   - MySQL Databases → Create Database
+   - Anote: nome do banco, usuário e senha
+
+2️⃣ IMPORTAR SCHEMA
+   - phpMyAdmin → Import
+   - Selecione o arquivo: schema_mysql.sql
+   - Click "Go"
+
+3️⃣ CONFIGURAR CREDENCIAIS
+   - Edite: config/database.php
+   - Coloque suas credenciais MySQL
+   - TROQUE a senha de admin!
+
+4️⃣ FAZER UPLOAD
+   - Extraia este arquivo no seu computador
+   - File Manager → public_html
+   - Upload todos os arquivos
+   - Mova conteúdo de public/ para raiz
+
+5️⃣ TESTAR
+   - Acesse: https://seudominio.com
+   - Admin: https://seudominio.com/admin
+
+📖 DOCUMENTAÇÃO COMPLETA
+   Leia: DEPLOY_INSTRUCTIONS.md
+
+✅ PRONTO! Sua aplicação está no ar!
+
+===========================================
