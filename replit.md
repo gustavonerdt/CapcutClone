@@ -14,7 +14,7 @@ Create a conversion-optimized perfume sales funnel that tracks every user intera
 - ✅ Added server-side authentication with express-session for admin security
 - ✅ Created protected API endpoints with requireAdmin middleware
 - ✅ Full end-to-end testing with quiz flow and admin authentication
-- ✅ **LATEST**: Typography adjusted to match client reference (italic heading, compact text sizes for mobile-first)
+- ✅ **LATEST**: Form capture removed - Quiz now goes directly to success/buy page (no name/email/phone collection)
 
 ## Project Architecture
 
