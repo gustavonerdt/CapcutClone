@@ -194,7 +194,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 max-w-4xl mx-auto px-4"
+                className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 pt-6 sm:pt-8 max-w-3xl mx-auto px-4"
               >
                 {heroBenefits.map((benefit, index) => (
                   <motion.div
