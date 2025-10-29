@@ -4,18 +4,279 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Admin Dashboard - Naiper's Club</title>
-  <link rel="icon" type="image/png" href="/favicon.png">
-  
-  <!-- Carregar mesmos assets do frontend principal -->
-  <script type="module" crossorigin src="/assets/index-CKjaeUoE.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-wrsZg0Hc.css">
+  <title>Login Admin - Naiper's Club</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .login-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo h1 {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFD700, #1E90FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    
+    .logo p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #FFD700;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #FFD700, #FFB700);
+      border: none;
+      border-radius: 8px;
+      color: #000000;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .loading.show {
+      display: block;
+    }
+    
+    .credentials-hint {
+      margin-top: 20px;
+      padding: 12px;
+      background: rgba(30, 144, 255, 0.1);
+      border: 1px solid rgba(30, 144, 255, 0.3);
+      border-radius: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+    
+    .credentials-hint strong {
+      color: #1E90FF;
+    }
+  </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div class="login-container">
+    <div class="logo">
+      <h1>🔐 Admin</h1>
+      <p>Naiper's Club Dashboard</p>
+    </div>
+    
+    <div id="errorMessage" class="error-message"></div>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          placeholder="admin" 
+          required
+          autocomplete="username"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="••••••••••" 
+          required
+          autocomplete="current-password"
+        >
+      </div>
+      
+      <button type="submit" id="submitBtn">
+        Entrar no Dashboard
+      </button>
+    </form>
+    
+    <div id="loading" class="loading">
+      Verificando credenciais...
+    </div>
+    
+    <div class="credentials-hint">
+      <strong>📋 Credenciais padrão:</strong><br>
+      Usuário: <code>admin</code><br>
+      Senha: <code>naipersadmin2024</code><br>
+      (ou conforme configurado no servidor)
+    </div>
+  </div>
+
   <script>
-    // Redirecionar para rota admin no React
-    window.history.pushState({}, '', '/admin');
+    const form = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const loading = document.getElementById('loading');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 5000);
+    }
+    
+    function setLoading(isLoading) {
+      if (isLoading) {
+        loading.classList.add('show');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Entrando...';
+      } else {
+        loading.classList.remove('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Entrar no Dashboard';
+      }
+    }
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      
+      if (!username || !password) {
+        showError('Por favor, preencha usuário e senha.');
+        return;
+      }
+      
+      setLoading(true);
+      errorMessage.classList.remove('show');
+      
+      try {
+        // Fazer login via API
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+          credentials: 'include' // Importante para cookies
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+          // Login bem-sucedido! Redirecionar para dashboard
+          window.location.href = '/admin/dashboard.html';
+        } else {
+          showError(data.error || 'Credenciais inválidas. Verifique usuário e senha.');
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Erro no login:', error);
+        showError('Erro ao conectar com o servidor. Verifique sua conexão.');
+        setLoading(false);
+      }
+    });
+    
+    // Auto-focus no campo de usuário
+    document.getElementById('username').focus();
   </script>
 </body>
 </html>
