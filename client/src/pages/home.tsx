@@ -10,11 +10,19 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { QuizFormData, InsertQuizResponse } from "@shared/schema";
 import { quizFormSchema } from "@shared/schema";
-import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star, Quote, PiggyBank, DollarSign, X } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star, Quote, PiggyBank, DollarSign, X, Zap } from "lucide-react";
 import heroImage from "@assets/generated_images/Video_creator_hero_image_1da409f3.png";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
+import feedback1 from "@assets/photo_1_2025-10-29_01-17-10_1761711502705.jpg";
+import feedback2 from "@assets/photo_2_2025-10-29_01-17-10_1761711502705.jpg";
+import feedback3 from "@assets/photo_3_2025-10-29_01-17-10_1761711502706.jpg";
+import feedback4 from "@assets/photo_4_2025-10-29_01-17-10_1761711502708.jpg";
+import feedback5 from "@assets/photo_5_2025-10-29_01-17-10_1761711502708.jpg";
+import feedback6 from "@assets/photo_6_2025-10-29_01-17-10_1761711502709.jpg";
 import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits, testimonials } from "@/data/quiz-questions";
 import { useTracking } from "@/hooks/use-tracking";
+
+const feedbackImages = [feedback1, feedback2, feedback3, feedback4, feedback5, feedback6];
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState<"hero" | "quiz" | "success">("hero");
@@ -228,7 +236,7 @@ export default function Home() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -100, opacity: 0 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 bg-black"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-32 sm:pt-36 pb-16 bg-black"
           >
             <div className="max-w-3xl w-full space-y-6 sm:space-y-8">
               {currentQuestion.type === "benefits" && (
@@ -375,20 +383,24 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* CTA Button 1 */}
-              <div className="text-center">
+              {/* CTA Button 1 - Botão Premium */}
+              <div className="text-center space-y-2">
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full max-w-2xl py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
+                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 border-4 border-green-300 shadow-2xl shadow-green-500/60 text-black hover-elevate active-elevate-2"
                   data-testid="button-buy-now"
                 >
-                  <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                  Comprar agora por 12x R$ 20,37
+                  <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 mr-3" />
+                  COMPRAR AGORA POR 12x R$ 20,37
                 </Button>
+                <p className="text-xs sm:text-sm text-green-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-green-400" />
+                  Oferta por tempo limitado
+                </p>
               </div>
 
-              {/* Testimonials Section */}
+              {/* Testimonials Section - Com Imagens */}
               <div className="space-y-6 sm:space-y-8">
                 <div className="text-center space-y-3">
                   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#FFD700] via-white to-[#FFD700] bg-clip-text text-transparent">
@@ -398,33 +410,26 @@ export default function Home() {
                 </div>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {testimonials.map((testimonial, index) => (
+                  {feedbackImages.map((image, index) => (
                     <motion.div
-                      key={testimonial.id}
+                      key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/20 backdrop-blur-xl hover:border-[#FFD700]/40 hover:shadow-xl hover:shadow-[#FFD700]/20 transition-all group"
-                      data-testid={`testimonial-${testimonial.id}`}
+                      className="group relative overflow-hidden rounded-2xl border-2 border-white/20 hover:border-[#FFD700]/60 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FFD700]/30"
+                      data-testid={`feedback-image-${index}`}
                     >
-                      <Quote className="absolute top-4 right-4 w-8 h-8 text-[#FFD700]/20 group-hover:text-[#FFD700]/40 transition-colors" />
-                      
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-1">
-                          {[...Array(testimonial.rating)].map((_, i) => (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                      <img 
+                        src={image} 
+                        alt={`Feedback de cliente ${index + 1}`}
+                        className="w-full h-auto object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                        <div className="flex items-center gap-1 justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          {[...Array(5)].map((_, i) => (
                             <Star key={i} className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
                           ))}
-                        </div>
-                        
-                        <p className="text-sm sm:text-base text-white/90 leading-relaxed line-clamp-4">
-                          "{testimonial.text}"
-                        </p>
-                        
-                        <div className="pt-2 border-t border-white/10">
-                          <p className="text-xs sm:text-sm font-semibold text-[#FFD700]">
-                            {testimonial.name}
-                          </p>
-                          <p className="text-xs text-white/50">Cliente Verificado</p>
                         </div>
                       </div>
                     </motion.div>
@@ -450,17 +455,21 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* CTA Button 2 */}
-              <div className="text-center">
+              {/* CTA Button 2 - Botão Premium */}
+              <div className="text-center space-y-2">
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full max-w-2xl py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
+                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 border-4 border-green-300 shadow-2xl shadow-green-500/60 text-black hover-elevate active-elevate-2"
                   data-testid="button-buy-success"
                 >
-                  <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                  Comprar agora por 12x R$ 20,37
+                  <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 mr-3" />
+                  COMPRAR AGORA POR 12x R$ 20,37
                 </Button>
+                <p className="text-xs sm:text-sm text-green-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-green-400" />
+                  Oferta por tempo limitado
+                </p>
               </div>
 
               {/* Benefits Badges */}
