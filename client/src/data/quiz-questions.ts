@@ -48,6 +48,24 @@ export const quizQuestions: QuizQuestion[] = [
   },
 ];
 
+export const heroBenefits = [
+  {
+    icon: "💰",
+    title: "70% de Economia",
+    description: "Economize até 70% em perfumes importados originais"
+  },
+  {
+    icon: "💸",
+    title: "Renda Extra",
+    description: "Jeito simples de fazer renda extra com perfumes"
+  },
+  {
+    icon: "👥",
+    title: "+10k Membros",
+    description: "Mais de 10.000 membros já economizando"
+  }
+];
+
 export const benefits = [
   "até 70% de economia",
   "possibilidade de fazer até R$ 1.000,00 de renda extra",

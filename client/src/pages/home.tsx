@@ -10,10 +10,10 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { QuizFormData, InsertQuizResponse } from "@shared/schema";
 import { quizFormSchema } from "@shared/schema";
-import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star } from "lucide-react";
 import heroImage from "@assets/generated_images/Video_creator_hero_image_1da409f3.png";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
-import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl } from "@/data/quiz-questions";
+import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits } from "@/data/quiz-questions";
 import { useTracking } from "@/hooks/use-tracking";
 
 export default function Home() {
@@ -147,7 +147,7 @@ export default function Home() {
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20"
               >
-                <Sparkles className="w-4 h-4 text-yellow-400" />
+                <Star className="w-4 h-4 text-[#1E90FF] fill-[#1E90FF]" />
                 <span className="text-sm font-medium text-white">Mais de 10.000 membros já economizando até 70%</span>
               </motion.div>
 
@@ -155,7 +155,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
               >
                 Me responda uma coisa...
               </motion.h1>
@@ -164,11 +164,11 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-xl md:text-2xl text-white/90 leading-relaxed"
+                className="text-lg md:text-xl text-white/95 leading-relaxed max-w-3xl mx-auto"
               >
-                Você gostaria de <span className="font-bold text-white">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
-                <span className="font-bold text-white">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
-                <span className="font-bold text-white">Renda extra</span>?
+                Você gostaria de <span className="font-bold text-[#FFD700]">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
+                <span className="font-bold text-[#FFD700]">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
+                <span className="font-bold text-[#FFD700]">Renda extra</span>?
               </motion.p>
 
               <motion.div
@@ -180,10 +180,10 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={() => setCurrentStep("quiz")}
-                  className="px-12 py-6 text-lg font-semibold rounded-full bg-gradient-to-r from-primary via-pink-500 to-purple-600 hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="px-12 py-6 text-lg font-semibold rounded-full bg-[#FFD700] text-black hover:bg-[#FFD700]/90 hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-105 transition-all duration-300"
                   data-testid="button-start-quiz"
                 >
-                  <Play className="w-5 h-5 mr-2" />
+                  <Star className="w-5 h-5 mr-2 text-[#1E90FF] fill-[#1E90FF]" />
                   Sim, com certeza!
                 </Button>
               </motion.div>
@@ -192,20 +192,21 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="flex items-center justify-center gap-8 pt-8 text-white/80"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-3xl mx-auto"
               >
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="text-sm">70% de Economia</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5" />
-                  <span className="text-sm">Renda Extra</span>
-                </div>
-                <div className="flex items-center gap-2 hidden sm:flex">
-                  <Users className="w-5 h-5" />
-                  <span className="text-sm">+10k Membros</span>
-                </div>
+                {heroBenefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                    className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center space-y-2"
+                  >
+                    <div className="text-3xl">{benefit.icon}</div>
+                    <h3 className="font-bold text-[#FFD700] text-lg">{benefit.title}</h3>
+                    <p className="text-white/80 text-sm">{benefit.description}</p>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
           </motion.div>
