@@ -72,7 +72,6 @@ export default function Home() {
     setAnswers({ ...answers, [answerKey]: answerId });
     form.setValue(answerKey, answerId);
     
-    // Track answer click
     trackEvent("answer_click", quizStep + 1, answerId);
     
     if (quizStep < quizQuestions.length - 1) {
@@ -96,19 +95,19 @@ export default function Home() {
   const currentQuestion = quizQuestions[quizStep];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       {currentStep === "quiz" && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-card border-b">
-          <div className="h-1 bg-muted">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+          <div className="h-1.5 bg-white/5">
             <motion.div
-              className="h-full bg-gradient-to-r from-primary via-pink-500 to-purple-600"
+              className="h-full bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700]"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
             />
           </div>
-          <div className="max-w-2xl mx-auto px-4 py-3">
-            <p className="text-sm font-medium text-muted-foreground text-center">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 py-3">
+            <p className="text-sm font-medium text-white/70 text-center">
               Pergunta {quizStep + 1} de {quizQuestions.length}
             </p>
           </div>
@@ -122,40 +121,48 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen flex items-center justify-center relative overflow-hidden"
+            className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black"
           >
             <div
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center opacity-40"
               style={{ backgroundImage: `url(${heroImage})` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black" />
             </div>
 
-            <div className="relative z-10 max-w-2xl mx-auto px-4 py-16 text-center space-y-8">
+            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-center space-y-6 sm:space-y-8">
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="flex justify-center mb-8"
+                className="flex justify-center mb-4 sm:mb-6 lg:mb-8"
               >
-                <img src={logoImage} alt="Naiper's Club" className="h-24 md:h-32 w-auto" data-testid="logo-naipers" />
+                <img 
+                  src={logoImage} 
+                  alt="Naiper's Club" 
+                  className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto" 
+                  data-testid="logo-naipers" 
+                />
               </motion.div>
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#FFD700]/20 to-[#1E90FF]/20 backdrop-blur-xl border border-[#FFD700]/30 shadow-lg shadow-[#FFD700]/20"
               >
-                <Star className="w-4 h-4 text-[#1E90FF] fill-[#1E90FF]" />
-                <span className="text-sm font-medium text-white">Mais de 10.000 membros já economizando até 70%</span>
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#1E90FF] fill-[#1E90FF] animate-pulse" />
+                <span className="text-xs sm:text-sm font-semibold text-white">
+                  Mais de 10.000 membros já economizando até 70%
+                </span>
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#FFD700] fill-[#FFD700] animate-pulse" />
               </motion.div>
 
               <motion.h1
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight px-4"
               >
                 Me responda uma coisa...
               </motion.h1>
@@ -164,26 +171,26 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-lg md:text-xl text-white/95 leading-relaxed max-w-3xl mx-auto"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto px-4"
               >
-                Você gostaria de <span className="font-bold text-[#FFD700]">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
-                <span className="font-bold text-[#FFD700]">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
-                <span className="font-bold text-[#FFD700]">Renda extra</span>?
+                Você gostaria de <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
+                <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
+                <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">Renda extra</span>?
               </motion.p>
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+                className="flex flex-col items-center gap-4 sm:gap-6 pt-4 sm:pt-6"
               >
                 <Button
                   size="lg"
                   onClick={() => setCurrentStep("quiz")}
-                  className="px-12 py-6 text-lg font-semibold rounded-full bg-[#FFD700] text-black hover:bg-[#FFD700]/90 hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-105 transition-all duration-300"
+                  className="px-8 sm:px-12 lg:px-16 py-6 sm:py-7 lg:py-8 text-base sm:text-lg lg:text-xl font-bold rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFB700] text-black hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-105 transition-all duration-300 border-2 border-[#FFD700]/50"
                   data-testid="button-start-quiz"
                 >
-                  <Star className="w-5 h-5 mr-2 text-[#1E90FF] fill-[#1E90FF]" />
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-[#1E90FF] fill-[#1E90FF]" />
                   Sim, com certeza!
                 </Button>
               </motion.div>
@@ -192,7 +199,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-3xl mx-auto"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 max-w-4xl mx-auto px-4"
               >
                 {heroBenefits.map((benefit, index) => (
                   <motion.div
@@ -200,11 +207,13 @@ export default function Home() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 + index * 0.1 }}
-                    className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 text-center space-y-2"
+                    className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border border-white/20 text-center space-y-3 hover:border-[#FFD700]/50 hover:shadow-lg hover:shadow-[#FFD700]/20 transition-all duration-300"
                   >
-                    <div className="text-3xl">{benefit.icon}</div>
-                    <h3 className="font-bold text-[#FFD700] text-lg">{benefit.title}</h3>
-                    <p className="text-white/80 text-sm">{benefit.description}</p>
+                    <div className="text-4xl sm:text-5xl">{benefit.icon}</div>
+                    <h3 className="font-bold text-[#FFD700] text-lg sm:text-xl drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-white/80 text-sm sm:text-base leading-relaxed">{benefit.description}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -219,12 +228,12 @@ export default function Home() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -100, opacity: 0 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className="min-h-screen flex items-center justify-center px-4 pt-24 pb-16"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 bg-black"
           >
-            <div className="max-w-2xl w-full space-y-8">
+            <div className="max-w-3xl w-full space-y-6 sm:space-y-8">
               {currentQuestion.type === "benefits" && (
                 <div className="space-y-6 mb-8">
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight px-4">
                     {currentQuestion.question}
                   </h2>
                   <div className="space-y-4">
@@ -234,10 +243,10 @@ export default function Home() {
                         initial={{ x: -20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: index * 0.1 }}
-                        className="flex items-start gap-3 p-4 rounded-lg bg-card border"
+                        className="flex items-start gap-3 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-white/5 to-white/10 border border-white/20 backdrop-blur-sm"
                       >
-                        <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-lg text-foreground">{benefit}</span>
+                        <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700] flex-shrink-0 mt-0.5" />
+                        <span className="text-base sm:text-lg text-white">{benefit}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -245,22 +254,24 @@ export default function Home() {
               )}
 
               {currentQuestion.type === "progress" && (
-                <div className="space-y-6 text-center">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
+                <div className="space-y-6 text-center px-4">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
                     {currentQuestion.question}
                   </h2>
-                  <div className="space-y-4 p-8 rounded-xl bg-card border-2 border-primary/20">
-                    <div className="relative w-full h-6 bg-muted rounded-full overflow-hidden">
+                  <div className="space-y-6 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 border-2 border-[#FFD700]/30 backdrop-blur-xl">
+                    <div className="relative w-full h-8 bg-white/10 rounded-full overflow-hidden border border-white/20">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-green-400 to-emerald-500"
+                        className="h-full bg-gradient-to-r from-green-400 via-[#FFD700] to-green-500"
                         initial={{ width: 0 }}
                         animate={{ width: "85%" }}
                         transition={{ duration: 1.5, delay: 0.3 }}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-4xl font-bold text-primary">Alta!</p>
-                      <p className="text-lg text-foreground">
+                    <div className="space-y-3">
+                      <p className="text-4xl sm:text-5xl font-bold text-[#FFD700] drop-shadow-[0_0_30px_rgba(255,215,0,0.6)]">
+                        Alta!
+                      </p>
+                      <p className="text-base sm:text-lg text-white leading-relaxed">
                         Você está literalmente pronto(a) para dar o próximo passo e se tornar um consumidor inteligente e destravar mais uma fonte de renda.
                       </p>
                     </div>
@@ -269,18 +280,18 @@ export default function Home() {
               )}
 
               {currentQuestion.type === "testimonials" && (
-                <div className="space-y-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center leading-tight">
+                <div className="space-y-6 px-4">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight">
                     {currentQuestion.question}
                   </h2>
-                  <div className="space-y-4 p-6 rounded-xl bg-card border">
-                    <p className="text-base text-muted-foreground italic text-center">
+                  <div className="space-y-4 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/20 backdrop-blur-xl">
+                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#FFD700] pl-4">
                       "Estou economizando muito com o Naiper's Club! Já consegui fazer minha primeira venda também." - Maria S.
                     </p>
-                    <p className="text-base text-muted-foreground italic text-center">
+                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#1E90FF] pl-4">
                       "Incrível! Nunca imaginei que seria tão fácil ter acesso a perfumes importados com esses preços." - João P.
                     </p>
-                    <p className="text-base text-muted-foreground italic text-center">
+                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#FFD700] pl-4">
                       "Melhor investimento que fiz. Já recuperei o valor da assinatura só com as economias!" - Ana L.
                     </p>
                   </div>
@@ -288,7 +299,7 @@ export default function Home() {
               )}
 
               {!currentQuestion.type || currentQuestion.type === "standard" ? (
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight px-4">
                   {currentQuestion.question}
                 </h2>
               ) : null}
@@ -301,15 +312,15 @@ export default function Home() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
                     onClick={() => handleAnswer(currentQuestion.id, answer.id)}
-                    className="w-full p-6 rounded-xl border-2 border-border bg-card hover-elevate active-elevate-2 transition-all text-left group"
+                    className="w-full p-5 sm:p-6 rounded-xl border-2 border-white/20 bg-gradient-to-r from-white/5 to-white/10 hover:border-[#FFD700]/60 hover:shadow-xl hover:shadow-[#FFD700]/20 active:scale-[0.98] transition-all text-left group backdrop-blur-sm"
                     data-testid={`button-answer-${answer.id}`}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <CheckCircle2 className="w-6 h-6 text-primary" />
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#FFD700]/20 to-[#1E90FF]/20 flex items-center justify-center group-hover:from-[#FFD700]/40 group-hover:to-[#1E90FF]/40 transition-colors border border-white/20">
+                        <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700]" />
                       </div>
-                      <span className="text-lg font-medium text-foreground flex-1">{answer.text}</span>
-                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                      <span className="text-base sm:text-lg font-medium text-white flex-1 pr-2">{answer.text}</span>
+                      <ArrowRight className="w-5 h-5 text-white/60 group-hover:text-[#FFD700] group-hover:translate-x-1 transition-all flex-shrink-0" />
                     </div>
                   </motion.button>
                 ))}
@@ -324,79 +335,84 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen flex items-center justify-center px-4 py-16"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16 bg-black"
           >
-            <div className="max-w-4xl w-full space-y-8">
+            <div className="max-w-5xl w-full space-y-8 sm:space-y-10">
               <div className="text-center space-y-4">
-                <img src={logoImage} alt="Naiper's Club" className="h-20 w-auto mx-auto mb-4" />
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-pink-500 to-purple-600 bg-clip-text text-transparent">
+                <img src={logoImage} alt="Naiper's Club" className="h-16 sm:h-20 w-auto mx-auto mb-4" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700] bg-clip-text text-transparent">
                   Antes / Depois
                 </h2>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="p-6 rounded-xl border-2 border-destructive/30 bg-destructive/5 space-y-4">
-                  <h3 className="text-xl font-bold text-foreground">Antes</h3>
-                  <div className="space-y-2">
-                    <p className="text-base text-muted-foreground">❌ Comprando errado e perdendo dinheiro</p>
-                    <p className="text-base text-muted-foreground">❌ Sem vender por falta de conhecimento</p>
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8">
+                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-red-500/40 bg-red-500/10 space-y-4 backdrop-blur-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Antes</h3>
+                  <div className="space-y-2.5">
+                    <p className="text-sm sm:text-base text-white/80">❌ Comprando errado e perdendo dinheiro</p>
+                    <p className="text-sm sm:text-base text-white/80">❌ Sem vender por falta de conhecimento</p>
                   </div>
                 </div>
-                <div className="p-6 rounded-xl border-2 border-primary/30 bg-primary/5 space-y-4">
-                  <h3 className="text-xl font-bold text-foreground">Depois</h3>
-                  <div className="space-y-2">
-                    <p className="text-base text-foreground">✅ Comprando certo - Economizando até 70%</p>
-                    <p className="text-base text-foreground">✅ Lucrando de R$ 150 à 400 por venda feita</p>
+                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-[#FFD700]/50 bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 space-y-4 backdrop-blur-xl shadow-xl shadow-[#FFD700]/20">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#FFD700]">Depois</h3>
+                  <div className="space-y-2.5">
+                    <p className="text-sm sm:text-base text-white font-medium">✅ Comprando certo - Economizando até 70%</p>
+                    <p className="text-sm sm:text-base text-white font-medium">✅ Lucrando de R$ 150 à 400 por venda feita</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/10 to-pink-500/10 rounded-xl p-8 space-y-6">
-                <div className="space-y-3">
+              <div className="bg-gradient-to-br from-[#FFD700]/15 via-[#1E90FF]/10 to-[#FFD700]/15 rounded-2xl p-6 sm:p-8 lg:p-10 space-y-6 sm:space-y-8 border border-[#FFD700]/30 backdrop-blur-xl">
+                <div className="space-y-3 sm:space-y-4">
                   {finalOfferBenefits.map((benefit, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-foreground">{benefit}</span>
+                      <CheckCircle2 className="w-5 h-5 text-[#FFD700] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base text-white">{benefit}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="text-center space-y-4 pt-4">
-                  <p className="text-lg font-bold text-foreground">
+                <div className="text-center space-y-4 sm:space-y-6 pt-4 sm:pt-6">
+                  <p className="text-lg sm:text-xl font-bold text-white">
                     Naiper's Club - o seu novo jeito de viver, consumir e lucrar com perfumes importados!
                   </p>
                   <Button
                     size="lg"
                     onClick={handleBuyClick}
-                    className="w-full py-8 text-xl font-bold rounded-full bg-gradient-to-r from-green-500 to-emerald-600 hover:shadow-2xl hover:scale-105 transition-all"
+                    className="w-full py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
                     data-testid="button-buy-now"
                   >
-                    <ShoppingCart className="w-6 h-6 mr-2" />
+                    <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                     Comprar agora por 12x R$ 20,37
                   </Button>
-                  <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-                    <span>🎁 Acesso imediato</span>
-                    <span>💥 De R$ 297 Por 197</span>
-                    <span>📲 Experiencie direto do seu celular</span>
-                    <span>🚀 Comece hoje a economizar e lucrar</span>
+                  <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/70">
+                    <span className="bg-white/10 px-3 py-1.5 rounded-full">🎁 Acesso imediato</span>
+                    <span className="bg-white/10 px-3 py-1.5 rounded-full">💥 De R$ 297 Por 197</span>
+                    <span className="bg-white/10 px-3 py-1.5 rounded-full">📲 Direto do celular</span>
+                    <span className="bg-white/10 px-3 py-1.5 rounded-full">🚀 Comece hoje</span>
                   </div>
                 </div>
               </div>
 
               <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-4">Ou preencha seus dados para receber mais informações:</p>
+                <p className="text-sm sm:text-base text-white/70 mb-6">Ou preencha seus dados para receber mais informações:</p>
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 max-w-md mx-auto">
+                  <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5 max-w-md mx-auto">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-medium">Nome completo</FormLabel>
+                          <FormLabel className="text-base font-medium text-white">Nome completo</FormLabel>
                           <FormControl>
-                            <Input {...field} placeholder="Seu nome" className="h-12 text-base" data-testid="input-name" />
+                            <Input 
+                              {...field} 
+                              placeholder="Seu nome" 
+                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
+                              data-testid="input-name" 
+                            />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -406,11 +422,17 @@ export default function Home() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-medium">E-mail</FormLabel>
+                          <FormLabel className="text-base font-medium text-white">E-mail</FormLabel>
                           <FormControl>
-                            <Input {...field} type="email" placeholder="seu@email.com" className="h-12 text-base" data-testid="input-email" />
+                            <Input 
+                              {...field} 
+                              type="email" 
+                              placeholder="seu@email.com" 
+                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
+                              data-testid="input-email" 
+                            />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -420,11 +442,18 @@ export default function Home() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-medium">WhatsApp</FormLabel>
+                          <FormLabel className="text-base font-medium text-white">WhatsApp</FormLabel>
                           <FormControl>
-                            <Input {...field} value={field.value ?? ""} type="tel" placeholder="(00) 00000-0000" className="h-12 text-base" data-testid="input-phone" />
+                            <Input 
+                              {...field} 
+                              value={field.value ?? ""} 
+                              type="tel" 
+                              placeholder="(00) 00000-0000" 
+                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
+                              data-testid="input-phone" 
+                            />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -433,7 +462,7 @@ export default function Home() {
                       type="submit"
                       size="lg"
                       disabled={submitMutation.isPending}
-                      className="w-full py-6 text-lg font-semibold rounded-full bg-gradient-to-r from-primary via-pink-500 to-purple-600"
+                      className="w-full py-6 sm:py-7 text-base sm:text-lg font-semibold rounded-full bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700] text-black hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-[1.02] transition-all border-2 border-[#FFD700]/50"
                       data-testid="button-submit-form"
                     >
                       {submitMutation.isPending ? "Enviando..." : "Receber Mais Informações"}
@@ -451,35 +480,37 @@ export default function Home() {
             key="success"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="min-h-screen flex items-center justify-center px-4 py-16"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16 bg-black"
           >
-            <div className="max-w-lg w-full text-center space-y-8">
+            <div className="max-w-lg w-full text-center space-y-6 sm:space-y-8">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 mb-4"
+                className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 mb-4 shadow-2xl shadow-green-500/50"
               >
-                <CheckCircle2 className="w-12 h-12 text-white" />
+                <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
               </motion.div>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                 Tudo certo, {form.getValues("name").split(" ")[0]}! 🎉
               </h2>
 
-              <p className="text-lg text-muted-foreground">
-                Enviamos as informações para <span className="font-semibold text-foreground">{form.getValues("email")}</span>
+              <p className="text-base sm:text-lg text-white/80">
+                Enviamos as informações para <span className="font-semibold text-[#FFD700]">{form.getValues("email")}</span>
               </p>
 
-              <div className="bg-gradient-to-br from-primary/10 to-pink-500/10 rounded-xl p-6 space-y-4">
-                <p className="text-base text-foreground"><strong>Não perca essa oportunidade!</strong></p>
+              <div className="bg-gradient-to-br from-[#FFD700]/15 to-[#1E90FF]/15 rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6 border border-[#FFD700]/30 backdrop-blur-xl">
+                <p className="text-base sm:text-lg text-white font-semibold">
+                  <strong>Não perca essa oportunidade!</strong>
+                </p>
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full py-6 text-lg font-bold rounded-full bg-gradient-to-r from-green-500 to-emerald-600 hover:shadow-xl"
+                  className="w-full py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
                   data-testid="button-buy-success"
                 >
-                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
                   Garantir Minha Vaga Agora
                 </Button>
               </div>
@@ -488,7 +519,7 @@ export default function Home() {
                 size="lg"
                 onClick={() => window.location.reload()}
                 variant="outline"
-                className="px-8 py-6 rounded-full"
+                className="px-6 sm:px-8 py-5 sm:py-6 rounded-full bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-[#FFD700]/50 backdrop-blur-sm"
                 data-testid="button-restart"
               >
                 Refazer o Quiz
