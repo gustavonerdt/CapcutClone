@@ -1,0 +1,222 @@
+══════════════════════════════════════════════════════════════════
+          🔑 ONDE CONFIGURAR SENHAS E CREDENCIAIS              
+                    NAIPER'S CLUB SYSTEM                        
+══════════════════════════════════════════════════════════════════
+
+⚠️ IMPORTANTE: 
+Este arquivo explica ONDE configurar suas credenciais.
+NUNCA compartilhe suas senhas reais com ninguém!
+
+══════════════════════════════════════════════════════════════════
+
+📁 ARQUIVO PRINCIPAL: config/database.php
+
+Este é o ÚNICO arquivo onde você precisa configurar tudo!
+
+══════════════════════════════════════════════════════════════════
+
+🔧 1. CREDENCIAIS DO BANCO MySQL:
+
+Abra: config/database.php
+
+Encontre estas linhas:
+
+┌──────────────────────────────────────────────────────────────┐
+│ define('DB_HOST', 'localhost');                              │
+│ define('DB_NAME', 'seu_usuario_naipers_club');  ← TROCAR    │
+│ define('DB_USER', 'seu_usuario_mysql');         ← TROCAR    │
+│ define('DB_PASS', 'sua_senha_mysql');           ← TROCAR    │
+└──────────────────────────────────────────────────────────────┘
+
+O QUE COLOCAR:
+
+• DB_HOST: 
+  → Hostinger: 'localhost' (não mude!)
+  
+• DB_NAME: 
+  → Nome completo do banco que você criou
+  → Exemplo: 'u123456_naipers_club'
+  → No Hostinger geralmente é: seu_usuario_nome_banco
+  
+• DB_USER:
+  → Usuário MySQL que você criou
+  → Exemplo: 'u123456_admin'
+  
+• DB_PASS:
+  → Senha do usuário MySQL
+  → A que você definiu ao criar o usuário
+
+──────────────────────────────────────────────────────────────────
+
+🔐 2. CREDENCIAIS DE ADMIN (Dashboard):
+
+No mesmo arquivo: config/database.php
+
+Encontre estas linhas:
+
+┌──────────────────────────────────────────────────────────────┐
+│ define('ADMIN_USERNAME', 'admin');                           │
+│ define('ADMIN_PASSWORD', password_hash('naipersadmin2024',  │
+│        PASSWORD_BCRYPT));                                    │
+└──────────────────────────────────────────────────────────────┘
+
+COMO TROCAR A SENHA DE ADMIN:
+
+OPÇÃO 1 - Direto no código (Recomendado):
+
+┌──────────────────────────────────────────────────────────────┐
+│ // Defina sua senha aqui                                    │
+│ $minhaSenha = 'MinhaS3nhaF0rt3!';                           │
+│                                                              │
+│ define('ADMIN_USERNAME', 'admin');                           │
+│ define('ADMIN_PASSWORD', password_hash($minhaSenha,         │
+│        PASSWORD_BCRYPT));                                    │
+└──────────────────────────────────────────────────────────────┘
+
+OPÇÃO 2 - Gerar hash externamente:
+
+1. Acesse: https://bcrypt-generator.com/
+2. Digite sua senha
+3. Copie o hash gerado
+4. Cole no código:
+
+┌──────────────────────────────────────────────────────────────┐
+│ define('ADMIN_PASSWORD', '$2y$10$abcd...seu_hash_aqui');    │
+└──────────────────────────────────────────────────────────────┘
+
+══════════════════════════════════════════════════════════════════
+
+✅ EXEMPLO COMPLETO (config/database.php):
+
+<?php
+// ===============================================
+// CONFIGURAÇÃO DO BANCO DE DADOS
+// ===============================================
+
+// 🔴 TROCAR ESTAS CREDENCIAIS!
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'u123456_naipers_club');  
+define('DB_USER', 'u123456_admin');         
+define('DB_PASS', 'minhaSenhaMySql123!');   
+
+// ===============================================
+// CONFIGURAÇÃO DE ADMIN
+// ===============================================
+
+// Username do admin (pode deixar "admin")
+define('ADMIN_USERNAME', 'admin');
+
+// 🔴 TROCAR ESTA SENHA!
+$senhaAdmin = 'MinhaSenhaAdminSegura2024!';
+define('ADMIN_PASSWORD', password_hash($senhaAdmin, PASSWORD_BCRYPT));
+
+// ... resto do código ...
+?>
+
+══════════════════════════════════════════════════════════════════
+
+🎯 ONDE USAR ESTAS CREDENCIAIS:
+
+1. BANCO DE DADOS:
+   → Usadas automaticamente pelo sistema
+   → Você NÃO precisa digitar em lugar algum
+   → Apenas configure uma vez no arquivo
+
+2. LOGIN ADMIN:
+   → Acesse: https://seudominio.com/admin
+   → Usuário: admin (ou o que você definiu)
+   → Senha: (a que você definiu no arquivo)
+
+══════════════════════════════════════════════════════════════════
+
+🔒 DICAS DE SEGURANÇA:
+
+✅ Use senhas FORTES:
+   • Pelo menos 12 caracteres
+   • Letras maiúsculas e minúsculas
+   • Números
+   • Caracteres especiais (!@#$%^&*)
+   
+❌ NÃO use senhas fracas:
+   • 123456
+   • password
+   • admin
+   • naipersclub
+   • datas de nascimento
+
+✅ NUNCA compartilhe:
+   • config/database.php
+   • Suas senhas
+   • Acesso ao cPanel
+
+✅ Faça backup:
+   • Salve config/database.php em local seguro
+   • Anote suas credenciais em gerenciador de senhas
+   • Nunca deixe no código versões antigas
+
+══════════════════════════════════════════════════════════════════
+
+❓ PERGUNTAS FREQUENTES:
+
+Q: Onde pego as credenciais MySQL?
+A: No cPanel → MySQL Databases (onde você criou o banco)
+
+Q: Como recupero a senha de admin se esquecer?
+A: Edite config/database.php e defina uma nova
+
+Q: Posso mudar o username "admin"?
+A: Sim! Altere ADMIN_USERNAME no arquivo
+
+Q: Preciso criar vários usuários admin?
+A: Não, este sistema tem apenas 1 admin
+
+Q: As senhas ficam salvas onde?
+A: MySQL password está no config/database.php
+   Admin password está hasheada no mesmo arquivo
+
+══════════════════════════════════════════════════════════════════
+
+📝 CHECKLIST DE CONFIGURAÇÃO:
+
+□ Banco MySQL criado no cPanel
+□ Usuário MySQL criado
+□ Privilégios concedidos ao usuário
+□ schema_mysql.sql importado
+□ DB_NAME alterado em config/database.php
+□ DB_USER alterado em config/database.php
+□ DB_PASS alterado em config/database.php
+□ ADMIN_PASSWORD alterado em config/database.php
+□ Arquivo config/database.php salvo
+□ Teste de login admin funcionando
+
+══════════════════════════════════════════════════════════════════
+
+✅ PRONTO!
+
+Se você configurou tudo corretamente:
+• O sistema conecta no banco ✅
+• Você consegue fazer login no admin ✅
+• Tudo funciona perfeitamente ✅
+
+══════════════════════════════════════════════════════════════════
+
+🆘 PRECISA DE AJUDA?
+
+Se algo não funcionar:
+1. Releia este arquivo
+2. Confira INSTALACAO.txt
+3. Verifique ESTRUTURA.txt
+
+Se o erro persistir:
+• Ative exibição de erros PHP
+• Veja logs de erro no cPanel
+• Confirme que o banco existe
+
+══════════════════════════════════════════════════════════════════
+
+🔐 LEMBRE-SE:
+
+Suas credenciais são como as chaves da sua casa.
+Guarde-as em local seguro e não compartilhe com ninguém!
+
+══════════════════════════════════════════════════════════════════
