@@ -14,7 +14,7 @@ Create a conversion-optimized perfume sales funnel that tracks every user intera
 - ✅ Added server-side authentication with express-session for admin security
 - ✅ Created protected API endpoints with requireAdmin middleware
 - ✅ Full end-to-end testing with quiz flow and admin authentication
-- ✅ **LATEST**: Removed "+10k Membros" card from hero section (only 2 benefit cards remain)
+- ✅ **LATEST**: Logo added to quiz header - appears at top of all 5 questions above progress bar
 
 ## Project Architecture
 

@@ -98,6 +98,14 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       {currentStep === "quiz" && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+          <div className="flex justify-center py-3 border-b border-white/5">
+            <img 
+              src={logoImage} 
+              alt="Naiper's Club" 
+              className="h-10 sm:h-12 w-auto" 
+              data-testid="logo-quiz" 
+            />
+          </div>
           <div className="h-1.5 bg-white/5">
             <motion.div
               className="h-full bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700]"
