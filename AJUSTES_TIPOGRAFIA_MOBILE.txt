@@ -1,0 +1,110 @@
+# AJUSTES DE TIPOGRAFIA - NAIPER'S CLUB
+## Data: 29 de Outubro, 2025
+
+### 📝 MUDANÇAS REALIZADAS
+
+Ajustes nos tamanhos de texto da tela inicial para ficarem mais proporcionais ao mobile e similares à referência fornecida pelo cliente.
+
+---
+
+## 🎯 ALTERAÇÕES NO ARQUIVO: client/src/pages/home.tsx
+
+### 1. HEADING PRINCIPAL - "Me responda uma coisa..."
+
+**ANTES:**
+```tsx
+className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white leading-tight px-4"
+```
+
+**DEPOIS:**
+```tsx
+className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-semibold italic text-white leading-tight px-4"
+```
+
+**Mudanças:**
+- ✅ Reduzido de `text-2xl` → `text-xl` (mobile)
+- ✅ Reduzido de `text-4xl` → `text-3xl` (desktop)
+- ✅ Alterado `font-bold` → `font-semibold` (mais fino)
+- ✅ Adicionado `italic` (estilo itálico como na referência)
+
+---
+
+### 2. PARÁGRAFO DE DESCRIÇÃO - "Você gostaria de economizar..."
+
+**ANTES:**
+```tsx
+className="text-sm sm:text-base md:text-lg lg:text-lg text-white/95 leading-relaxed max-w-4xl mx-auto px-4"
+```
+
+**DEPOIS:**
+```tsx
+className="text-xs sm:text-sm md:text-base lg:text-base text-white/90 leading-relaxed max-w-3xl mx-auto px-4"
+```
+
+**Mudanças:**
+- ✅ Reduzido de `text-sm` → `text-xs` (mobile)
+- ✅ Reduzido de `text-lg` → `text-base` (desktop)
+- ✅ Reduzido opacidade de `95%` → `90%`
+- ✅ Reduzido largura máxima de `max-w-4xl` → `max-w-3xl`
+
+---
+
+## 📊 COMPARATIVO DE TAMANHOS
+
+### Mobile (375px):
+- Heading: `text-xl` (1.25rem / 20px)
+- Parágrafo: `text-xs` (0.75rem / 12px)
+
+### Tablet (768px):
+- Heading: `text-2xl` (1.5rem / 24px)
+- Parágrafo: `text-sm` (0.875rem / 14px)
+
+### Desktop (1024px+):
+- Heading: `text-3xl` (1.875rem / 30px)
+- Parágrafo: `text-base` (1rem / 16px)
+
+---
+
+## ✅ RESULTADO FINAL
+
+- ✅ Textos mais compactos e legíveis
+- ✅ Heading em itálico (similar à referência)
+- ✅ Proporções equilibradas entre mobile/desktop
+- ✅ Visual mais clean e profissional
+- ✅ Melhor experiência em telas pequenas (Instagram mobile)
+
+---
+
+## 📦 ARQUIVOS ATUALIZADOS
+
+1. `client/src/pages/home.tsx` - Componente principal
+2. `dist/public/` - Build de produção
+3. `naipers-club-final/public/` - Pacote Hostinger
+4. `NAIPERS-CLUB-COMPLETO.tar.gz` - Arquivo final (3.6 MB)
+
+---
+
+## 🚀 COMO APLICAR NO HOSTINGER
+
+1. Baixe: `NAIPERS-CLUB-COMPLETO.tar.gz`
+2. Extraia a pasta `naipers-club-final/`
+3. Faça upload de todos os arquivos para o Hostinger
+4. Configure o banco MySQL conforme `schema_mysql.sql`
+5. Edite `config/database.php` com suas credenciais
+6. Acesse seu domínio e teste!
+
+---
+
+## 📱 TESTADO EM:
+
+- ✅ Desktop (1920x1080)
+- ✅ Mobile (375x667)
+- ✅ Todos os breakpoints responsivos
+- ✅ Quiz completo funcionando
+- ✅ Formulário de captura
+- ✅ Página de sucesso
+
+---
+
+**Desenvolvido para Naiper's Club**
+**Otimizado para conversão e mobile-first**

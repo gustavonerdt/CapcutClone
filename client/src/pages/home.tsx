@@ -149,7 +149,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white leading-tight px-4"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-semibold italic text-white leading-tight px-4"
               >
                 Me responda uma coisa...
               </motion.h1>
@@ -158,7 +158,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-sm sm:text-base md:text-lg lg:text-lg text-white/95 leading-relaxed max-w-4xl mx-auto px-4"
+                className="text-xs sm:text-sm md:text-base lg:text-base text-white/90 leading-relaxed max-w-3xl mx-auto px-4"
               >
                 Você gostaria de <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
                 <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
