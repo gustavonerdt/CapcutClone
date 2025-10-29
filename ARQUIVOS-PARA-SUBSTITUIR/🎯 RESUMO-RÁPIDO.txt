@@ -4,8 +4,10 @@
 
 ✅ MUDANÇAS FEITAS:
 
-1. Botões "COMPRAR AGORA" agora são AMARELOS
-2. Login admin só pede usuário "Bruno" (sem senha)
+1. 6 imagens de feedback agora na PERGUNTA 4 (carrossel)
+2. Página final com seção ANTES/DEPOIS (placeholders)
+3. Botões amarelos mantidos
+4. Login admin "Bruno" sem senha
 
 ═══════════════════════════════════════════════════════════
 
@@ -20,8 +22,17 @@
 
 🧪 TESTAR:
 
-✓ Quiz: botões amarelos no final
-✓ Admin (/admin): digitar "Bruno" e entrar
+✓ Pergunta 4: carrossel com 6 imagens (use as setas)
+✓ Página final: seção "Veja a Transformação"
+✓ Botões amarelos
+✓ Admin: digitar "Bruno" e entrar
+
+═══════════════════════════════════════════════════════════
+
+🖼️ IMAGENS ANTES/DEPOIS:
+
+Por enquanto: ícones Frown/Smile
+Depois: você pode me passar 2 imagens reais
 
 ═══════════════════════════════════════════════════════════
 

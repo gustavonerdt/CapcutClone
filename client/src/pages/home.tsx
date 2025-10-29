@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,8 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { QuizFormData, InsertQuizResponse } from "@shared/schema";
 import { quizFormSchema } from "@shared/schema";
-import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star, Quote, PiggyBank, DollarSign, X, Zap } from "lucide-react";
+import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users, Star, Quote, PiggyBank, DollarSign, X, Zap, ChevronLeft, ChevronRight, Frown, Smile } from "lucide-react";
+import useEmblaCarousel from 'embla-carousel-react';
 import heroImage from "@assets/generated_images/Video_creator_hero_image_1da409f3.png";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
 import feedback1 from "@assets/photo_1_2025-10-29_01-17-10_1761711502705.jpg";
@@ -23,6 +24,88 @@ import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits,
 import { useTracking } from "@/hooks/use-tracking";
 
 const feedbackImages = [feedback1, feedback2, feedback3, feedback4, feedback5, feedback6];
+
+function TestimonialsCarousel({ question }: { question: string }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="space-y-6 px-4">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center leading-tight">
+        {question}
+      </h2>
+      
+      <div className="relative">
+        <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+          <div className="flex gap-4">
+            {feedbackImages.map((image, index) => (
+              <div 
+                key={index} 
+                className="flex-[0_0_100%] sm:flex-[0_0_80%] md:flex-[0_0_60%] min-w-0"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative overflow-hidden rounded-2xl border-2 border-white/20 hover:border-[#FFD700]/60 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FFD700]/30"
+                  data-testid={`carousel-feedback-${index}`}
+                >
+                  <img 
+                    src={image} 
+                    alt={`Feedback de cliente ${index + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                    <div className="flex items-center gap-1 justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <button
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border-2 border-[#FFD700]/50 flex items-center justify-center hover:bg-black/80 disabled:opacity-30 disabled:cursor-not-allowed transition-all z-10 backdrop-blur-sm"
+          data-testid="button-carousel-prev"
+        >
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700]" />
+        </button>
+
+        <button
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 border-2 border-[#FFD700]/50 flex items-center justify-center hover:bg-black/80 disabled:opacity-30 disabled:cursor-not-allowed transition-all z-10 backdrop-blur-sm"
+          data-testid="button-carousel-next"
+        >
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#FFD700]" />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState<"hero" | "quiz" | "success">("hero");
@@ -288,22 +371,7 @@ export default function Home() {
               )}
 
               {currentQuestion.type === "testimonials" && (
-                <div className="space-y-6 px-4">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center leading-tight">
-                    {currentQuestion.question}
-                  </h2>
-                  <div className="space-y-4 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/20 backdrop-blur-xl">
-                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#FFD700] pl-4">
-                      "Estou economizando muito com o Naiper's Club! Já consegui fazer minha primeira venda também." - Maria S.
-                    </p>
-                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#1E90FF] pl-4">
-                      "Incrível! Nunca imaginei que seria tão fácil ter acesso a perfumes importados com esses preços." - João P.
-                    </p>
-                    <p className="text-sm sm:text-base text-white/90 italic text-center leading-relaxed border-l-4 border-[#FFD700] pl-4">
-                      "Melhor investimento que fiz. Já recuperei o valor da assinatura só com as economias!" - Ana L.
-                    </p>
-                  </div>
-                </div>
+                <TestimonialsCarousel question={currentQuestion.question} />
               )}
 
               {!currentQuestion.type || currentQuestion.type === "standard" ? (
@@ -400,41 +468,44 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Testimonials Section - Com Imagens */}
+              {/* Antes / Depois Comparison Images */}
               <div className="space-y-6 sm:space-y-8">
                 <div className="text-center space-y-3">
                   <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#FFD700] via-white to-[#FFD700] bg-clip-text text-transparent">
-                    O Que Nossos Clientes Dizem
+                    Veja a Transformação
                   </h3>
-                  <p className="text-sm sm:text-base text-white/70">Depoimentos reais de quem já está economizando e lucrando</p>
+                  <p className="text-sm sm:text-base text-white/70">Antes e depois de se tornar membro do Naiper's Club</p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  {feedbackImages.map((image, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group relative overflow-hidden rounded-2xl border-2 border-white/20 hover:border-[#FFD700]/60 transition-all duration-300 hover:shadow-2xl hover:shadow-[#FFD700]/30"
-                      data-testid={`feedback-image-${index}`}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-                      <img 
-                        src={image} 
-                        alt={`Feedback de cliente ${index + 1}`}
-                        className="w-full h-auto object-cover"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                        <div className="flex items-center gap-1 justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
-                          ))}
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+                  <div className="space-y-4">
+                    <div className="relative aspect-square rounded-2xl border-2 border-red-500/40 bg-gradient-to-br from-red-500/10 to-red-900/10 backdrop-blur-xl overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center space-y-4 p-6">
+                          <Frown className="w-24 h-24 sm:w-32 sm:h-32 mx-auto text-red-400" />
+                          <p className="text-lg sm:text-xl font-bold text-white">ANTES</p>
+                          <p className="text-sm text-white/70">Sem oportunidade, sem lucro</p>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="relative aspect-square rounded-2xl border-2 border-[#FFD700]/50 bg-gradient-to-br from-[#FFD700]/10 to-green-500/10 backdrop-blur-xl overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center space-y-4 p-6">
+                          <Smile className="w-24 h-24 sm:w-32 sm:h-32 mx-auto text-[#FFD700]" />
+                          <p className="text-lg sm:text-xl font-bold text-[#FFD700]">DEPOIS</p>
+                          <p className="text-sm text-white/70">Economizando e lucrando!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <p className="text-center text-xs sm:text-sm text-white/50 italic">
+                  * Adicione suas próprias imagens antes/depois aqui
+                </p>
               </div>
 
               {/* Benefits Section */}
