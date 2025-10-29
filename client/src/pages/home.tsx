@@ -140,7 +140,7 @@ export default function Home() {
                 <img 
                   src={logoImage} 
                   alt="Naiper's Club" 
-                  className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto" 
+                  className="h-16 sm:h-20 md:h-24 lg:h-24 w-auto" 
                   data-testid="logo-naipers" 
                 />
               </motion.div>
@@ -149,7 +149,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight px-4"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white leading-tight px-4"
               >
                 Me responda uma coisa...
               </motion.h1>
@@ -158,7 +158,7 @@ export default function Home() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto px-4"
+                className="text-sm sm:text-base md:text-lg lg:text-lg text-white/95 leading-relaxed max-w-4xl mx-auto px-4"
               >
                 Você gostaria de <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">economizar até 70%</span> na compra de perfumes importados originais para o seu uso próprio, ter{" "}
                 <span className="font-bold text-[#FFD700] drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]">acesso facilitado</span> as fontes dos donos de lojas de shopping e descobrir um jeito simples de ainda fazer{" "}
@@ -174,10 +174,10 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={() => setCurrentStep("quiz")}
-                  className="px-8 sm:px-12 lg:px-16 py-6 sm:py-7 lg:py-8 text-base sm:text-lg lg:text-xl font-bold rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFB700] text-black hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-105 transition-all duration-300 border-2 border-[#FFD700]/50"
+                  className="px-8 sm:px-10 lg:px-12 py-5 sm:py-6 lg:py-6 text-base sm:text-lg lg:text-lg font-bold rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFB700] text-black hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-105 transition-all duration-300 border-2 border-[#FFD700]/50"
                   data-testid="button-start-quiz"
                 >
-                  <Star className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-[#1E90FF] fill-[#1E90FF]" />
+                  <Star className="w-5 h-5 sm:w-5 sm:h-5 mr-2 text-[#1E90FF] fill-[#1E90FF]" />
                   Sim, com certeza!
                 </Button>
               </motion.div>
@@ -196,11 +196,11 @@ export default function Home() {
                     transition={{ delay: 0.6 + index * 0.1 }}
                     className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border border-white/20 text-center space-y-3 hover:border-[#FFD700]/50 hover:shadow-lg hover:shadow-[#FFD700]/20 transition-all duration-300"
                   >
-                    <div className="text-4xl sm:text-5xl">{benefit.icon}</div>
-                    <h3 className="font-bold text-[#FFD700] text-lg sm:text-xl drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
+                    <div className="text-3xl sm:text-4xl">{benefit.icon}</div>
+                    <h3 className="font-bold text-[#FFD700] text-base sm:text-lg drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
                       {benefit.title}
                     </h3>
-                    <p className="text-white/80 text-sm sm:text-base leading-relaxed">{benefit.description}</p>
+                    <p className="text-white/80 text-xs sm:text-sm leading-relaxed">{benefit.description}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -220,7 +220,7 @@ export default function Home() {
             <div className="max-w-3xl w-full space-y-6 sm:space-y-8">
               {currentQuestion.type === "benefits" && (
                 <div className="space-y-6 mb-8">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight px-4">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center leading-tight px-4">
                     {currentQuestion.question}
                   </h2>
                   <div className="space-y-4">
@@ -242,7 +242,7 @@ export default function Home() {
 
               {currentQuestion.type === "progress" && (
                 <div className="space-y-6 text-center px-4">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
                     {currentQuestion.question}
                   </h2>
                   <div className="space-y-6 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 border-2 border-[#FFD700]/30 backdrop-blur-xl">
@@ -255,10 +255,10 @@ export default function Home() {
                       />
                     </div>
                     <div className="space-y-3">
-                      <p className="text-4xl sm:text-5xl font-bold text-[#FFD700] drop-shadow-[0_0_30px_rgba(255,215,0,0.6)]">
+                      <p className="text-3xl sm:text-4xl font-bold text-[#FFD700] drop-shadow-[0_0_30px_rgba(255,215,0,0.6)]">
                         Alta!
                       </p>
-                      <p className="text-base sm:text-lg text-white leading-relaxed">
+                      <p className="text-sm sm:text-base text-white leading-relaxed">
                         Você está literalmente pronto(a) para dar o próximo passo e se tornar um consumidor inteligente e destravar mais uma fonte de renda.
                       </p>
                     </div>
@@ -268,7 +268,7 @@ export default function Home() {
 
               {currentQuestion.type === "testimonials" && (
                 <div className="space-y-6 px-4">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center leading-tight">
                     {currentQuestion.question}
                   </h2>
                   <div className="space-y-4 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/20 backdrop-blur-xl">
@@ -286,7 +286,7 @@ export default function Home() {
               )}
 
               {!currentQuestion.type || currentQuestion.type === "standard" ? (
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center leading-tight px-4">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center leading-tight px-4">
                   {currentQuestion.question}
                 </h2>
               ) : null}
