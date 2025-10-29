@@ -20,7 +20,6 @@ interface Analytics {
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
   // Check auth status on mount
@@ -40,7 +39,7 @@ export default function Admin() {
   };
 
   const loginMutation = useMutation({
-    mutationFn: async (credentials: { username: string; password: string }) => {
+    mutationFn: async (credentials: { username: string }) => {
       return await apiRequest("POST", "/api/auth/login", credentials);
     },
     onSuccess: () => {
@@ -48,7 +47,7 @@ export default function Admin() {
       setLoginError("");
     },
     onError: () => {
-      setLoginError("Credenciais inválidas!");
+      setLoginError("Usuário inválido!");
     },
   });
 
@@ -59,7 +58,6 @@ export default function Admin() {
     onSuccess: () => {
       setIsAuthenticated(false);
       setUsername("");
-      setPassword("");
     },
   });
 
@@ -74,7 +72,7 @@ export default function Admin() {
   });
 
   const handleLogin = () => {
-    loginMutation.mutate({ username, password });
+    loginMutation.mutate({ username });
   };
 
   if (!isAuthenticated) {
@@ -84,25 +82,17 @@ export default function Admin() {
           <div className="text-center space-y-4">
             <img src={logoImage} alt="Naiper's Club Admin" className="h-20 w-auto mx-auto" />
             <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Entre com suas credenciais</p>
+            <p className="text-muted-foreground">Digite seu usuário para acessar</p>
           </div>
           <div className="space-y-4">
             <Input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Usuário"
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+              placeholder="Digite: Bruno"
               className="h-12 text-base"
               data-testid="input-admin-username"
-            />
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-              placeholder="Senha"
-              className="h-12 text-base"
-              data-testid="input-admin-password"
             />
             {loginError && (
               <p className="text-sm text-destructive text-center">{loginError}</p>
@@ -110,7 +100,7 @@ export default function Admin() {
             <Button 
               onClick={handleLogin} 
               disabled={loginMutation.isPending}
-              className="w-full h-12 text-lg font-semibold"
+              className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-yellow-400 to-amber-500 text-black hover-elevate active-elevate-2"
               data-testid="button-admin-login"
             >
               {loginMutation.isPending ? "Entrando..." : "Entrar"}

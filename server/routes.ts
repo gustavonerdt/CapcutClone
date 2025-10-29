@@ -4,9 +4,8 @@ import { storage } from "./storage";
 import { insertQuizResponseSchema, insertTrackingEventSchema, insertSessionSchema } from "@shared/schema";
 import { z } from "zod";
 
-// Admin credentials from environment (fallback for development only)
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "naipersadmin2024";
+// Admin username (simples, sem senha)
+const ADMIN_USERNAME = "Bruno";
 
 // Middleware to check admin authentication
 function requireAdmin(req: any, res: any, next: any) {
@@ -17,24 +16,16 @@ function requireAdmin(req: any, res: any, next: any) {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Admin login
+  // Admin login (apenas username, sem senha)
   app.post("/api/auth/login", async (req, res) => {
     try {
-      const { username, password } = req.body;
+      const { username } = req.body;
       
-      console.log('[LOGIN ATTEMPT]', {
-        receivedUsername: username,
-        expectedUsername: ADMIN_USERNAME,
-        usernameMatch: username === ADMIN_USERNAME,
-        passwordMatch: password === ADMIN_PASSWORD,
-        hasBody: !!req.body
-      });
-      
-      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      if (username === ADMIN_USERNAME) {
         req.session.isAdmin = true;
         res.json({ success: true });
       } else {
-        res.status(401).json({ error: "Invalid credentials" });
+        res.status(401).json({ error: "Invalid username" });
       }
     } catch (error) {
       console.error('[LOGIN ERROR]', error);

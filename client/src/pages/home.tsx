@@ -388,14 +388,14 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 border-4 border-green-300 shadow-2xl shadow-green-500/60 text-black hover-elevate active-elevate-2"
+                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 border-4 border-yellow-300 shadow-2xl shadow-yellow-500/60 text-black hover-elevate active-elevate-2"
                   data-testid="button-buy-now"
                 >
                   <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 mr-3" />
                   COMPRAR AGORA POR 12x R$ 20,37
                 </Button>
-                <p className="text-xs sm:text-sm text-green-400 font-semibold animate-pulse flex items-center justify-center gap-1">
-                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-green-400" />
+                <p className="text-xs sm:text-sm text-yellow-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400" />
                   Oferta por tempo limitado
                 </p>
               </div>
@@ -460,14 +460,14 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-green-400 to-emerald-500 border-4 border-green-300 shadow-2xl shadow-green-500/60 text-black hover-elevate active-elevate-2"
+                  className="w-full max-w-2xl text-xl sm:text-2xl font-black rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 border-4 border-yellow-300 shadow-2xl shadow-yellow-500/60 text-black hover-elevate active-elevate-2"
                   data-testid="button-buy-success"
                 >
                   <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7 mr-3" />
                   COMPRAR AGORA POR 12x R$ 20,37
                 </Button>
-                <p className="text-xs sm:text-sm text-green-400 font-semibold animate-pulse flex items-center justify-center gap-1">
-                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-green-400" />
+                <p className="text-xs sm:text-sm text-yellow-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400" />
                   Oferta por tempo limitado
                 </p>
               </div>
