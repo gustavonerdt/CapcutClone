@@ -58,11 +58,6 @@ export const heroBenefits = [
     icon: "💸",
     title: "Renda Extra",
     description: "Jeito simples de fazer renda extra com perfumes"
-  },
-  {
-    icon: "👥",
-    title: "+10k Membros",
-    description: "Mais de 10.000 membros já economizando"
   }
 ];
 

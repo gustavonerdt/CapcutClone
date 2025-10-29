@@ -1,0 +1,180 @@
+# CARD "+10K MEMBROS" REMOVIDO - NAIPER'S CLUB
+## Data: 29 de Outubro, 2025
+
+---
+
+## ✅ ELEMENTO REMOVIDO
+
+O card **"+10k Membros"** foi completamente removido da hero section!
+
+---
+
+## 🗑️ O QUE FOI REMOVIDO
+
+### **Card que foi deletado:**
+```
+┌─────────────────────────────┐
+│          👥                 │
+│     +10k Membros            │
+│  Mais de 10.000 membros     │
+│  já economizando            │
+└─────────────────────────────┘
+```
+
+---
+
+## 📊 HERO SECTION ANTES vs DEPOIS
+
+### ❌ **ANTES (3 cards):**
+```
+[💰 70% de Economia]  [💸 Renda Extra]  [👥 +10k Membros]
+```
+
+### ✅ **DEPOIS (2 cards):**
+```
+[💰 70% de Economia]  [💸 Renda Extra]
+```
+
+---
+
+## 📝 MUDANÇA TÉCNICA
+
+### **Arquivo Modificado:**
+`client/src/data/quiz-questions.ts`
+
+### **Array heroBenefits:**
+
+**ANTES:**
+```typescript
+export const heroBenefits = [
+  {
+    icon: "💰",
+    title: "70% de Economia",
+    description: "Economize até 70% em perfumes importados originais"
+  },
+  {
+    icon: "💸",
+    title: "Renda Extra",
+    description: "Jeito simples de fazer renda extra com perfumes"
+  },
+  {
+    icon: "👥",
+    title: "+10k Membros",  ← REMOVIDO
+    description: "Mais de 10.000 membros já economizando"  ← REMOVIDO
+  }
+];
+```
+
+**DEPOIS:**
+```typescript
+export const heroBenefits = [
+  {
+    icon: "💰",
+    title: "70% de Economia",
+    description: "Economize até 70% em perfumes importados originais"
+  },
+  {
+    icon: "💸",
+    title: "Renda Extra",
+    description: "Jeito simples de fazer renda extra com perfumes"
+  }
+];
+```
+
+---
+
+## ✅ TESTES REALIZADOS
+
+### **E2E Test Completo:**
+- ✅ Hero section carrega corretamente
+- ✅ **Exatamente 2 cards** são exibidos (não 3)
+- ✅ Primeiro card: "70% de Economia" ✅
+- ✅ Segundo card: "Renda Extra" ✅
+- ✅ **NENHUM card "+10k Membros"** aparece
+- ✅ **NENHUM texto "10.000 membros"** na página
+- ✅ Layout responsivo funcionando (mobile/desktop)
+- ✅ Quiz completo funcionando
+
+---
+
+## 🎨 VISUAL ATUAL DA HERO SECTION
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│          [Logo Naiper's Club]           │
+│                                         │
+│    Me responda uma coisa...             │
+│                                         │
+│  Você gostaria de economizar até 70%... │
+│                                         │
+│     [Sim, com certeza!]                 │
+│        (Botão Dourado)                  │
+│                                         │
+│  ┌────────────┐  ┌────────────┐         │
+│  │    💰      │  │    💸      │         │
+│  │ 70% de     │  │  Renda     │         │
+│  │ Economia   │  │  Extra     │         │
+│  └────────────┘  └────────────┘         │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## 🎯 BENEFÍCIOS DA REMOÇÃO
+
+### **Visual Mais Limpo:**
+- Menos cards = menos poluição visual
+- Foco nos benefícios principais
+- Hero section mais direta
+
+### **Mensagem Mais Clara:**
+- Destaque para economia (70%)
+- Destaque para renda extra
+- Sem distrações
+
+### **Mobile-First:**
+- Menos scrolling necessário
+- Layout mais compacto
+- Melhor para Instagram
+
+---
+
+## 📦 PACOTE ATUALIZADO
+
+### **NAIPERS-CLUB-COMPLETO.tar.gz** (3.6 MB)
+- ✅ Card "+10k Membros" removido
+- ✅ Hero section com 2 cards apenas
+- ✅ Totalmente testado
+- ✅ Pronto para Hostinger!
+
+---
+
+## 🚀 RESUMO FINAL
+
+### **REMOVIDO:**
+- ❌ Card "+10k Membros"
+- ❌ Texto "Mais de 10.000 membros já economizando"
+- ❌ Ícone 👥 do terceiro card
+
+### **MANTIDO:**
+- ✅ Card "70% de Economia" (💰)
+- ✅ Card "Renda Extra" (💸)
+- ✅ Todo o resto do funnel funcionando
+
+---
+
+## 📥 PARA APLICAR NO HOSTINGER
+
+1. Baixe: **NAIPERS-CLUB-COMPLETO.tar.gz**
+2. Extraia a pasta **naipers-club-final/**
+3. Faça upload de todos os arquivos
+4. Acesse seu site
+
+**O card "+10k Membros" não vai mais aparecer!** ✨
+
+---
+
+**Desenvolvido para Naiper's Club**
+**Hero Section Otimizada - Conversão Máxima**
