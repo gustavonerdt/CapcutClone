@@ -1,0 +1,59 @@
+═══════════════════════════════════════════════════════════
+  GUIA RÁPIDO - BOTÕES AMARELOS
+═══════════════════════════════════════════════════════════
+
+✅ O QUE FOI FEITO:
+
+Todos os 4 botões agora são IGUAIS:
+  - Cor: #FFD700 → #FFB700 (gradiente ouro)
+  - Borda: dourada transparente
+  - Sombra: dourada brilhante
+  - Hover: aumenta 5% + sombra mais forte
+
+═══════════════════════════════════════════════════════════
+
+📦 FAZER UPLOAD:
+
+1. Limpe cache do navegador (Ctrl+Shift+Delete)
+2. Delete tudo em public_html/
+3. Faça upload da pasta "public/"
+4. Recarregue o site (Ctrl+Shift+R)
+
+═══════════════════════════════════════════════════════════
+
+🧪 TESTAR:
+
+✓ Hero: botão "Sim, com certeza!" amarelo?
+✓ Final: 2 botões "COMPRAR AGORA" amarelos?
+✓ Admin: botão "Entrar" amarelo?
+✓ Admin: aceita "Bruno" sem senha?
+
+═══════════════════════════════════════════════════════════
+
+🎨 COR DOS BOTÕES:
+
+Início: #FFD700 (ouro brilhante)
+Fim: #FFB700 (ouro quente)
+
+═══════════════════════════════════════════════════════════
+
+🔐 ADMIN AINDA PEDE SENHA?
+
+1. Limpe cache completamente
+2. Feche e abra o navegador
+3. Teste em modo anônimo (Ctrl+Shift+N)
+4. Digite só "Bruno" e aperte Enter
+
+═══════════════════════════════════════════════════════════
+
+📁 ARQUIVOS:
+
+public/ ← Faça upload disso
+styles.css ← CSS compilado (referência)
+codigo-fonte/ ← Código React original
+
+═══════════════════════════════════════════════════════════
+
+        ✨ PRONTO PARA USAR! ✨
+
+═══════════════════════════════════════════════════════════
