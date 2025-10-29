@@ -328,52 +328,87 @@ export default function Home() {
         {currentStep === "success" && (
           <motion.div
             key="success"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16 bg-black"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="min-h-screen px-4 sm:px-6 py-12 sm:py-16 bg-black"
           >
-            <div className="max-w-lg w-full text-center space-y-6 sm:space-y-8">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 mb-4 shadow-2xl shadow-green-500/50"
-              >
-                <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
-              </motion.div>
+            <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+              {/* Antes / Depois Section */}
+              <div className="text-center space-y-4 sm:space-y-6">
+                <img src={logoImage} alt="Naiper's Club" className="h-16 sm:h-20 w-auto mx-auto mb-4" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700] bg-clip-text text-transparent">
+                  Antes / Depois
+                </h2>
+              </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-                Parabéns! 🎉
-              </h2>
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-red-500/40 bg-red-500/10 space-y-4 backdrop-blur-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Antes</h3>
+                  <div className="space-y-2.5">
+                    <p className="text-sm sm:text-base text-white/80">❌ Comprando errado e perdendo dinheiro</p>
+                    <p className="text-sm sm:text-base text-white/80">❌ Sem vender por falta de conhecimento</p>
+                  </div>
+                </div>
+                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-[#FFD700]/50 bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 space-y-4 backdrop-blur-xl shadow-xl shadow-[#FFD700]/20">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#FFD700]">Depois</h3>
+                  <div className="space-y-2.5">
+                    <p className="text-sm sm:text-base text-white font-medium">✅ Comprando certo - Economizando até 70%</p>
+                    <p className="text-sm sm:text-base text-white font-medium">✅ Lucrando de R$ 150 à 400 por venda feita</p>
+                  </div>
+                </div>
+              </div>
 
-              <p className="text-base sm:text-lg text-white/80">
-                Você está pronto para entrar no Naiper's Club!
-              </p>
-
-              <div className="bg-gradient-to-br from-[#FFD700]/15 to-[#1E90FF]/15 rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6 border border-[#FFD700]/30 backdrop-blur-xl">
-                <p className="text-base sm:text-lg text-white font-semibold">
-                  <strong>Garanta seu acesso agora mesmo!</strong>
-                </p>
+              {/* CTA Button 1 */}
+              <div className="text-center">
                 <Button
                   size="lg"
                   onClick={handleBuyClick}
-                  className="w-full py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
-                  data-testid="button-buy-success"
+                  className="w-full max-w-2xl py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
+                  data-testid="button-buy-now"
                 >
                   <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                  Garantir Minha Vaga Agora
+                  Comprar agora por 12x R$ 20,37
                 </Button>
               </div>
 
-              <Button
-                size="lg"
-                onClick={() => window.location.reload()}
-                variant="outline"
-                className="px-6 sm:px-8 py-5 sm:py-6 rounded-full bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-[#FFD700]/50 backdrop-blur-sm"
-                data-testid="button-restart"
-              >
-                Refazer o Quiz
-              </Button>
+              {/* Benefits Section */}
+              <div className="bg-gradient-to-br from-[#FFD700]/15 via-[#1E90FF]/10 to-[#FFD700]/15 rounded-2xl p-6 sm:p-8 lg:p-10 space-y-6 sm:space-y-8 border border-[#FFD700]/30 backdrop-blur-xl">
+                <div className="space-y-3 sm:space-y-4">
+                  {finalOfferBenefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#FFD700] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base text-white">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-center space-y-4 sm:space-y-6 pt-4 sm:pt-6">
+                  <p className="text-lg sm:text-xl font-bold text-white">
+                    Naiper's Club - o seu novo jeito de viver, consumir e lucrar com perfumes importados!
+                  </p>
+                </div>
+              </div>
+
+              {/* CTA Button 2 */}
+              <div className="text-center">
+                <Button
+                  size="lg"
+                  onClick={handleBuyClick}
+                  className="w-full max-w-2xl py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
+                  data-testid="button-buy-success"
+                >
+                  <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
+                  Comprar agora por 12x R$ 20,37
+                </Button>
+              </div>
+
+              {/* Benefits Badges */}
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/70">
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">🎁 Acesso imediato</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">💥 De R$ 297 Por 197</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">📲 Experiencie direto do seu celular</span>
+                <span className="bg-white/10 px-3 py-1.5 rounded-full">🚀 Comece hoje a economizar e lucrar com perfumes importados originais</span>
+              </div>
             </div>
           </motion.div>
         )}
