@@ -4,7 +4,49 @@ import { storage } from "./storage";
 import { insertQuizResponseSchema, insertTrackingEventSchema, insertSessionSchema } from "@shared/schema";
 import { z } from "zod";
 
+// Admin credentials from environment (fallback for development only)
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "naipersadmin2024";
+
+// Middleware to check admin authentication
+function requireAdmin(req: any, res: any, next: any) {
+  if (req.session?.isAdmin) {
+    return next();
+  }
+  return res.status(401).json({ error: "Unauthorized" });
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Admin login
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        req.session.isAdmin = true;
+        res.json({ success: true });
+      } else {
+        res.status(401).json({ error: "Invalid credentials" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // Admin logout
+  app.post("/api/auth/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to logout" });
+      }
+      res.json({ success: true });
+    });
+  });
+
+  // Check auth status
+  app.get("/api/auth/status", (req, res) => {
+    res.json({ isAuthenticated: !!req.session?.isAdmin });
+  });
   // Submit quiz response
   app.post("/api/quiz-responses", async (req, res) => {
     try {
@@ -19,8 +61,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all quiz responses (for admin)
-  app.get("/api/quiz-responses", async (req, res) => {
+  // Get all quiz responses (for admin) - PROTECTED
+  app.get("/api/quiz-responses", requireAdmin, async (req, res) => {
     try {
       const responses = await storage.getAllQuizResponses();
       res.json(responses);
@@ -39,13 +81,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Update session
+  // Update session (validate allowed fields)
   app.patch("/api/sessions/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const session = await storage.updateSession(id, req.body);
+      const { completedQuiz, clickedBuy } = req.body;
+      
+      // Only allow updating specific fields
+      const allowedUpdates: any = {};
+      if (typeof completedQuiz === 'number') allowedUpdates.completedQuiz = completedQuiz;
+      if (typeof clickedBuy === 'number') allowedUpdates.clickedBuy = clickedBuy;
+      
+      const session = await storage.updateSession(id, allowedUpdates);
       res.json(session);
     } catch (error) {
+      console.error("Session update error:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -55,17 +105,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertTrackingEventSchema.parse(req.body);
       const event = await storage.createTrackingEvent(validatedData);
+      
+      // Log for monitoring (can be sent to analytics service in production)
+      console.log(`[TRACKING] ${validatedData.eventType} - Session: ${validatedData.sessionId}, Step: ${validatedData.stepNumber || 'N/A'}`);
+      
       res.json(event);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.error("Tracking validation error:", error.errors);
         return res.status(400).json({ error: "Invalid data", details: error.errors });
       }
+      console.error("Tracking error:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   });
 
-  // Get analytics (for admin dashboard)
-  app.get("/api/analytics", async (req, res) => {
+  // Get analytics (for admin dashboard) - PROTECTED
+  app.get("/api/analytics", requireAdmin, async (req, res) => {
     try {
       const analytics = await storage.getAnalytics();
       res.json(analytics);
@@ -75,8 +131,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all tracking events (for admin)
-  app.get("/api/tracking", async (req, res) => {
+  // Get all tracking events (for admin) - PROTECTED
+  app.get("/api/tracking", requireAdmin, async (req, res) => {
     try {
       const events = await storage.getAllEvents();
       res.json(events);

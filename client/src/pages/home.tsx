@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import type { InsertQuizResponse } from "@shared/schema";
-import { insertQuizResponseSchema } from "@shared/schema";
+import type { QuizFormData, InsertQuizResponse } from "@shared/schema";
+import { quizFormSchema } from "@shared/schema";
 import { Sparkles, CheckCircle2, ArrowRight, Play, ShoppingCart, TrendingUp, Award, Users } from "lucide-react";
 import heroImage from "@assets/generated_images/Video_creator_hero_image_1da409f3.png";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
@@ -37,8 +37,8 @@ export default function Home() {
     }
   }, [currentStep, quizStep]);
 
-  const form = useForm<InsertQuizResponse>({
-    resolver: zodResolver(insertQuizResponseSchema),
+  const form = useForm<QuizFormData>({
+    resolver: zodResolver(quizFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -50,9 +50,10 @@ export default function Home() {
   });
 
   const submitMutation = useMutation({
-    mutationFn: async (data: InsertQuizResponse) => {
+    mutationFn: async (data: QuizFormData) => {
       trackEvent("form_submit", 6);
-      return await apiRequest("POST", "/api/quiz-responses", { ...data, sessionId });
+      const payload: InsertQuizResponse = { ...data, sessionId };
+      return await apiRequest("POST", "/api/quiz-responses", payload);
     },
     onSuccess: () => {
       setCurrentStep("success");
@@ -81,7 +82,7 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (data: InsertQuizResponse) => {
+  const handleSubmit = (data: QuizFormData) => {
     submitMutation.mutate(data);
   };
 

@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BarChart3, Users, MousePointerClick, ShoppingCart, TrendingDown, Eye } from "lucide-react";
 import logoImage from "@assets/LOGOTIPO_NAIPERS_CLUB (1)_1761695015269.png";
-
-const ADMIN_PASSWORD = "naipersadmin2024";
+import { apiRequest } from "@/lib/queryClient";
 
 interface Analytics {
   totalSessions: number;
@@ -20,7 +19,49 @@ interface Analytics {
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+
+  // Check auth status on mount
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    try {
+      const status = await apiRequest("GET", "/api/auth/status", undefined) as any;
+      if (status.isAuthenticated) {
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      setIsAuthenticated(false);
+    }
+  };
+
+  const loginMutation = useMutation({
+    mutationFn: async (credentials: { username: string; password: string }) => {
+      return await apiRequest("POST", "/api/auth/login", credentials);
+    },
+    onSuccess: () => {
+      setIsAuthenticated(true);
+      setLoginError("");
+    },
+    onError: () => {
+      setLoginError("Credenciais inválidas!");
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest("POST", "/api/auth/logout", {});
+    },
+    onSuccess: () => {
+      setIsAuthenticated(false);
+      setUsername("");
+      setPassword("");
+    },
+  });
 
   const { data: analytics, isLoading } = useQuery<Analytics>({
     queryKey: ["/api/analytics"],
@@ -33,11 +74,7 @@ export default function Admin() {
   });
 
   const handleLogin = () => {
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-    } else {
-      alert("Senha incorreta!");
-    }
+    loginMutation.mutate({ username, password });
   };
 
   if (!isAuthenticated) {
@@ -47,24 +84,36 @@ export default function Admin() {
           <div className="text-center space-y-4">
             <img src={logoImage} alt="Naiper's Club Admin" className="h-20 w-auto mx-auto" />
             <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Entre com a senha de administrador</p>
+            <p className="text-muted-foreground">Entre com suas credenciais</p>
           </div>
           <div className="space-y-4">
+            <Input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Usuário"
+              className="h-12 text-base"
+              data-testid="input-admin-username"
+            />
             <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-              placeholder="Senha de admin"
+              placeholder="Senha"
               className="h-12 text-base"
               data-testid="input-admin-password"
             />
+            {loginError && (
+              <p className="text-sm text-destructive text-center">{loginError}</p>
+            )}
             <Button 
               onClick={handleLogin} 
+              disabled={loginMutation.isPending}
               className="w-full h-12 text-lg font-semibold"
               data-testid="button-admin-login"
             >
-              Entrar
+              {loginMutation.isPending ? "Entrando..." : "Entrar"}
             </Button>
           </div>
         </Card>
@@ -97,10 +146,11 @@ export default function Admin() {
           </div>
           <Button 
             variant="outline" 
-            onClick={() => setIsAuthenticated(false)}
+            onClick={() => logoutMutation.mutate()}
+            disabled={logoutMutation.isPending}
             data-testid="button-logout"
           >
-            Sair
+            {logoutMutation.isPending ? "Saindo..." : "Sair"}
           </Button>
         </div>
 

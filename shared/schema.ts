@@ -38,6 +38,13 @@ export const insertQuizResponseSchema = createInsertSchema(quizResponses).omit({
   createdAt: true,
 });
 
+// Schema for form validation (without sessionId since it's added programmatically)
+export const quizFormSchema = createInsertSchema(quizResponses).omit({
+  id: true,
+  createdAt: true,
+  sessionId: true,
+});
+
 export const insertTrackingEventSchema = createInsertSchema(trackingEvents).omit({
   id: true,
   createdAt: true,
@@ -50,6 +57,7 @@ export const insertSessionSchema = createInsertSchema(sessions).omit({
 });
 
 export type InsertQuizResponse = z.infer<typeof insertQuizResponseSchema>;
+export type QuizFormData = z.infer<typeof quizFormSchema>;
 export type QuizResponse = typeof quizResponses.$inferSelect;
 export type InsertTrackingEvent = z.infer<typeof insertTrackingEventSchema>;
 export type TrackingEvent = typeof trackingEvents.$inferSelect;
