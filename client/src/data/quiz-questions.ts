@@ -6,9 +6,9 @@ export const quizQuestions: QuizQuestion[] = [
     question: "De quem você comprava perfumes importados até este momento?",
     type: "standard",
     answers: [
-      { id: "sites-lojas-brasil", text: "Sites e lojas no Brasil" },
-      { id: "paraguai", text: "Comprava do Paraguai" },
-      { id: "conhecido", text: "De um conhecido" },
+      { id: "sites-lojas-brasil", text: "🛒 Sites e lojas no Brasil" },
+      { id: "paraguai", text: "🌎 Comprava do Paraguai" },
+      { id: "conhecido", text: "👥 De um conhecido" },
     ],
   },
   {
@@ -16,8 +16,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Você já cogitou revender perfumes importados e viver disso ou tá satisfeito como consumidor, mas tem interesse de comprar mais barato?",
     type: "standard",
     answers: [
-      { id: "revender", text: "Já cogitei revender perfumes importados" },
-      { id: "economizar", text: "Pretendo apenas economizar em minhas compras pessoais" },
+      { id: "revender", text: "💼 Já cogitei revender perfumes importados" },
+      { id: "economizar", text: "💰 Pretendo apenas economizar em minhas compras pessoais" },
     ],
   },
   {
@@ -25,8 +25,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "O Naipers Club vai te oferecer:",
     type: "benefits",
     answers: [
-      { id: "parece-bom", text: "Maravilha, parece ser muito bom!" },
-      { id: "prova", text: "Me prova que vale a pena" },
+      { id: "parece-bom", text: "✨ Maravilha, parece ser muito bom!" },
+      { id: "prova", text: "🤔 Me prova que vale a pena" },
     ],
   },
   {
@@ -34,8 +34,8 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Veja o que os membros do Club estão falando do NAIPER'S CLUB",
     type: "testimonials",
     answers: [
-      { id: "quero-reduzir", text: "Também quero reduzir meus custos e começar a ganhar dinheiro com isso!" },
-      { id: "deixar-passar", text: "Vou deixar passar essa chance…" },
+      { id: "quero-reduzir", text: "🚀 Também quero reduzir meus custos e começar a ganhar dinheiro com isso!" },
+      { id: "deixar-passar", text: "😕 Vou deixar passar essa chance…" },
     ],
   },
   {
@@ -43,7 +43,7 @@ export const quizQuestions: QuizQuestion[] = [
     question: "Com base nas suas respostas, sua chance de poupar muita grana em suas compras pessoais e lucrar com perfumes importados é:",
     type: "progress",
     answers: [
-      { id: "avancar", text: "Avançar" },
+      { id: "avancar", text: "▶️ Avançar" },
     ],
   },
 ];
