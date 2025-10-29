@@ -17,7 +17,7 @@ import { quizQuestions, benefits, finalOfferBenefits, checkoutUrl, heroBenefits 
 import { useTracking } from "@/hooks/use-tracking";
 
 export default function Home() {
-  const [currentStep, setCurrentStep] = useState<"hero" | "quiz" | "form" | "success">("hero");
+  const [currentStep, setCurrentStep] = useState<"hero" | "quiz" | "success">("hero");
   const [quizStep, setQuizStep] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const { toast } = useToast();
@@ -29,11 +29,8 @@ export default function Home() {
       trackEvent("page_view", 0);
     } else if (currentStep === "quiz") {
       trackEvent("page_view", quizStep + 1);
-    } else if (currentStep === "form") {
-      trackEvent("page_view", 6);
     } else if (currentStep === "success") {
-      trackEvent("page_view", 7);
-      updateSession({ completedQuiz: 1 });
+      trackEvent("page_view", 6);
     }
   }, [currentStep, quizStep]);
 
@@ -77,7 +74,10 @@ export default function Home() {
     if (quizStep < quizQuestions.length - 1) {
       setTimeout(() => setQuizStep(quizStep + 1), 300);
     } else {
-      setTimeout(() => setCurrentStep("form"), 300);
+      setTimeout(() => {
+        updateSession({ completedQuiz: 1 });
+        setCurrentStep("success");
+      }, 300);
     }
   };
 
@@ -86,7 +86,7 @@ export default function Home() {
   };
 
   const handleBuyClick = () => {
-    trackEvent("buy_click", currentStep === "form" ? 6 : 7);
+    trackEvent("buy_click", 7);
     updateSession({ clickedBuy: 1 });
     window.open(checkoutUrl, '_blank');
   };
@@ -316,151 +316,6 @@ export default function Home() {
           </motion.div>
         )}
 
-        {currentStep === "form" && (
-          <motion.div
-            key="form"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16 bg-black"
-          >
-            <div className="max-w-5xl w-full space-y-8 sm:space-y-10">
-              <div className="text-center space-y-4">
-                <img src={logoImage} alt="Naiper's Club" className="h-16 sm:h-20 w-auto mx-auto mb-4" />
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700] bg-clip-text text-transparent">
-                  Antes / Depois
-                </h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8">
-                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-red-500/40 bg-red-500/10 space-y-4 backdrop-blur-xl">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">Antes</h3>
-                  <div className="space-y-2.5">
-                    <p className="text-sm sm:text-base text-white/80">❌ Comprando errado e perdendo dinheiro</p>
-                    <p className="text-sm sm:text-base text-white/80">❌ Sem vender por falta de conhecimento</p>
-                  </div>
-                </div>
-                <div className="p-5 sm:p-6 lg:p-8 rounded-2xl border-2 border-[#FFD700]/50 bg-gradient-to-br from-[#FFD700]/10 to-[#1E90FF]/10 space-y-4 backdrop-blur-xl shadow-xl shadow-[#FFD700]/20">
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#FFD700]">Depois</h3>
-                  <div className="space-y-2.5">
-                    <p className="text-sm sm:text-base text-white font-medium">✅ Comprando certo - Economizando até 70%</p>
-                    <p className="text-sm sm:text-base text-white font-medium">✅ Lucrando de R$ 150 à 400 por venda feita</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-[#FFD700]/15 via-[#1E90FF]/10 to-[#FFD700]/15 rounded-2xl p-6 sm:p-8 lg:p-10 space-y-6 sm:space-y-8 border border-[#FFD700]/30 backdrop-blur-xl">
-                <div className="space-y-3 sm:space-y-4">
-                  {finalOfferBenefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#FFD700] flex-shrink-0 mt-0.5" />
-                      <span className="text-sm sm:text-base text-white">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-center space-y-4 sm:space-y-6 pt-4 sm:pt-6">
-                  <p className="text-lg sm:text-xl font-bold text-white">
-                    Naiper's Club - o seu novo jeito de viver, consumir e lucrar com perfumes importados!
-                  </p>
-                  <Button
-                    size="lg"
-                    onClick={handleBuyClick}
-                    className="w-full py-6 sm:py-8 text-lg sm:text-xl font-bold rounded-full bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:shadow-2xl hover:shadow-green-500/50 hover:scale-[1.02] transition-all border-2 border-green-400/50"
-                    data-testid="button-buy-now"
-                  >
-                    <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 mr-2" />
-                    Comprar agora por 12x R$ 20,37
-                  </Button>
-                  <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/70">
-                    <span className="bg-white/10 px-3 py-1.5 rounded-full">🎁 Acesso imediato</span>
-                    <span className="bg-white/10 px-3 py-1.5 rounded-full">💥 De R$ 297 Por 197</span>
-                    <span className="bg-white/10 px-3 py-1.5 rounded-full">📲 Direto do celular</span>
-                    <span className="bg-white/10 px-3 py-1.5 rounded-full">🚀 Comece hoje</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <p className="text-sm sm:text-base text-white/70 mb-6">Ou preencha seus dados para receber mais informações:</p>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5 max-w-md mx-auto">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-medium text-white">Nome completo</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field} 
-                              placeholder="Seu nome" 
-                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
-                              data-testid="input-name" 
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-medium text-white">E-mail</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field} 
-                              type="email" 
-                              placeholder="seu@email.com" 
-                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
-                              data-testid="input-email" 
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-base font-medium text-white">WhatsApp</FormLabel>
-                          <FormControl>
-                            <Input 
-                              {...field} 
-                              value={field.value ?? ""} 
-                              type="tel" 
-                              placeholder="(00) 00000-0000" 
-                              className="h-12 sm:h-14 text-base bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#FFD700] focus:ring-[#FFD700] backdrop-blur-sm" 
-                              data-testid="input-phone" 
-                            />
-                          </FormControl>
-                          <FormMessage className="text-red-400" />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      disabled={submitMutation.isPending}
-                      className="w-full py-6 sm:py-7 text-base sm:text-lg font-semibold rounded-full bg-gradient-to-r from-[#FFD700] via-[#1E90FF] to-[#FFD700] text-black hover:shadow-2xl hover:shadow-[#FFD700]/50 hover:scale-[1.02] transition-all border-2 border-[#FFD700]/50"
-                      data-testid="button-submit-form"
-                    >
-                      {submitMutation.isPending ? "Enviando..." : "Receber Mais Informações"}
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
-                  </form>
-                </Form>
-              </div>
-            </div>
-          </motion.div>
-        )}
 
         {currentStep === "success" && (
           <motion.div
@@ -480,16 +335,16 @@ export default function Home() {
               </motion.div>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-                Tudo certo, {form.getValues("name").split(" ")[0]}! 🎉
+                Parabéns! 🎉
               </h2>
 
               <p className="text-base sm:text-lg text-white/80">
-                Enviamos as informações para <span className="font-semibold text-[#FFD700]">{form.getValues("email")}</span>
+                Você está pronto para entrar no Naiper's Club!
               </p>
 
               <div className="bg-gradient-to-br from-[#FFD700]/15 to-[#1E90FF]/15 rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6 border border-[#FFD700]/30 backdrop-blur-xl">
                 <p className="text-base sm:text-lg text-white font-semibold">
-                  <strong>Não perca essa oportunidade!</strong>
+                  <strong>Garanta seu acesso agora mesmo!</strong>
                 </p>
                 <Button
                   size="lg"
