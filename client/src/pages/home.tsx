@@ -377,7 +377,7 @@ export default function Home() {
                     </div>
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#FFD700] flex-shrink-0 mt-1" />
-                      <p className="text-sm sm:text-base text-white font-medium">Lucrando de R$ 150 à 400 por venda feita</p>
+                      <p className="text-sm sm:text-base text-white font-medium">Lucrando de R$ 150 à R$400 por venda feita</p>
                     </div>
                   </div>
                 </div>
